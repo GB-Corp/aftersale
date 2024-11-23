@@ -1,0 +1,201 @@
+{% load static %}
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+
+<nav class="bg-gray-50 border-gray-100 dark:bg-gray-800 {% if LANGUAGE_CODE == 'ar' %}rtl{% endif %} fixed w-full z-50 top-0 transition-all duration-300" id="main-nav">
+    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+        <a href="{% url 'index' %}" class="flex items-center transform hover:scale-105 transition-transform duration-300">
+            <img src="{% static 'images/logo.png' %}" class="h-16 {% if LANGUAGE_CODE == 'ar' %}ml-3{% else %}mr-3{% endif %}" alt="AutoSahel Logo" />
+            <span class="self-center text-3xl font-semibold whitespace-nowrap dark:text-white">AutoSahel</span>
+        </a>
+        <div class="flex items-center md:order-2">
+            <!-- Desktop Language Switcher -->
+            <div class="hidden md:block">
+                <button type="button" data-dropdown-toggle="language-dropdown-menu" class="inline-flex items-center font-medium justify-center px-4 py-2 text-sm text-gray-900 dark:text-white rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white transition-colors duration-300">
+                    {% if LANGUAGE_CODE == 'ar' %}
+                        <svg class="w-5 h-5 {% if LANGUAGE_CODE == 'ar' %}ml-2{% else %}mr-2{% endif %}" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="1.5"/><path d="M8.5 12H15.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M12 8.5V15.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                        العربية
+                    {% else %}
+                        <svg class="w-5 h-5 {% if LANGUAGE_CODE == 'ar' %}ml-2{% else %}mr-2{% endif %}" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="1.5"/><path d="M2 12H22" stroke="currentColor" stroke-width="1.5"/><path d="M12 2C14.5013 4.73835 15.9228 8.29203 16 12C15.9228 15.708 14.5013 19.2616 12 22C9.49872 19.2616 8.07725 15.708 8 12C8.07725 8.29203 9.49872 4.73835 12 2Z" stroke="currentColor" stroke-width="1.5"/></svg>
+                        English
+                    {% endif %}
+                </button>
+                <!-- Desktop Language Dropdown -->
+                <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow-lg dark:bg-gray-700 transform transition-transform duration-300" id="language-dropdown-menu">
+                    <ul class="py-2 font-medium" role="none">
+                        <li>
+                            <form action="{% url 'set_language' %}" method="post" class="inline">
+                                {% csrf_token %}
+                                <input type="hidden" name="language" value="en">
+                                <input type="hidden" name="next" value="{{ request.path }}">
+                                <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white transition-colors duration-300">
+                                    <div class="inline-flex items-center">
+                                        English
+                                    </div>
+                                </button>
+                            </form>
+                        </li>
+                        <li>
+                            <form action="{% url 'set_language' %}" method="post" class="inline">
+                                {% csrf_token %}
+                                <input type="hidden" name="language" value="ar">
+                                <input type="hidden" name="next" value="{{ request.path }}">
+                                <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white transition-colors duration-300">
+                                    <div class="inline-flex items-center">
+                                        العربية
+                                    </div>
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Mobile menu button -->
+            <button type="button" class="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600 transition-colors duration-300" aria-controls="mobile-menu" aria-expanded="false" data-collapse-toggle="mobile-menu">
+                <span class="sr-only">{% trans "Open main menu" %}</span>
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
+            </button>
+        </div>
+        <!-- Mobile menu -->
+        <div class="items-center justify-between w-full md:flex md:w-auto md:order-1" id="mobile-menu">
+            <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-gray-50 dark:bg-gray-800 md:dark:bg-gray-800 dark:border-gray-700 {% if LANGUAGE_CODE == 'ar' %}md:space-x-reverse{% endif %} transition-all duration-300">
+                <li>
+                    <a href="{% url 'index' %}" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 transition-colors duration-300" aria-current="page">{% trans "Home" %}</a>
+                </li>
+                <li>
+                    <a href="#" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 transition-colors duration-300">{% trans "Services" %}</a>
+                </li>
+                <li>
+                    <a href="#" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 transition-colors duration-300">{% trans "Workshops" %}</a>
+                </li>
+                <li>
+                    <a href="#" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 transition-colors duration-300">{% trans "Contact" %}</a>
+                </li>
+                {% if user.is_authenticated %}
+                <li>
+                    <a href="#" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 transition-colors duration-300">{% trans "Dashboard" %}</a>
+                </li>
+                <li>
+                    <a href="{% url 'logout' %}" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 transition-colors duration-300">{% trans "Logout" %}</a>
+                </li>
+                {% else %}
+                <li>
+                    <a href="{% url 'login' %}" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 transition-colors duration-300">{% trans "Login" %}</a>
+                </li>
+                {% endif %}
+                <!-- Mobile Language Switcher -->
+                <li class="md:hidden border-t border-gray-200 dark:border-gray-700 mt-4 pt-4">
+                    <div class="flex flex-col space-y-2">
+                        <form action="{% url 'set_language' %}" method="post" class="inline">
+                            {% csrf_token %}
+                            <input type="hidden" name="language" value="en">
+                            <input type="hidden" name="next" value="{{ request.path }}">
+                            <button type="submit" class="block w-full text-left py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 transition-colors duration-300">
+                                <div class="inline-flex items-center">
+                                    <svg class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="1.5"/><path d="M2 12H22" stroke="currentColor" stroke-width="1.5"/><path d="M12 2C14.5013 4.73835 15.9228 8.29203 16 12C15.9228 15.708 14.5013 19.2616 12 22C9.49872 19.2616 8.07725 15.708 8 12C8.07725 8.29203 9.49872 4.73835 12 2Z" stroke="currentColor" stroke-width="1.5"/></svg>
+                                    English
+                                </div>
+                            </button>
+                        </form>
+                        <form action="{% url 'set_language' %}" method="post" class="inline">
+                            {% csrf_token %}
+                            <input type="hidden" name="language" value="ar">
+                            <input type="hidden" name="next" value="{{ request.path }}">
+                            <button type="submit" class="block w-full text-left py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 transition-colors duration-300">
+                                <div class="inline-flex items-center">
+                                    <svg class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="1.5"/><path d="M8.5 12H15.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M12 8.5V15.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                                    العربية
+                                </div>
+                            </button>
+                        </form>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Add padding to body to account for fixed header -->
+<div class="h-24"></div>
+
+<style>
+    .scroll-down {
+        transform: translateY(-100%);
+    }
+    .scroll-up {
+        transform: translateY(0);
+    }
+    
+    /* Mobile menu animation */
+    @media (max-width: 768px) {
+        #mobile-menu {
+            display: none;
+            transition: all 0.3s ease-out;
+        }
+        
+        #mobile-menu.show {
+            display: block;
+        }
+    }
+    
+    /* Add smooth scrolling to page */
+    html {
+        scroll-behavior: smooth;
+    }
+    
+    /* Add active state animation */
+    .nav-link-active {
+        position: relative;
+    }
+    
+    .nav-link-active::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        bottom: -2px;
+        left: 0;
+        background-color: #3B82F6;
+        transform: scaleX(0);
+        transition: transform 0.3s ease;
+    }
+    
+    .nav-link-active:hover::after {
+        transform: scaleX(1);
+    }
+</style>
+
+<script>
+    // Hide header on scroll down, show on scroll up
+    let lastScroll = 0;
+    const nav = document.getElementById('main-nav');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileMenuButton = document.querySelector('[data-collapse-toggle="mobile-menu"]');
+    
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset;
+        
+        if (currentScroll <= 0) {
+            nav.classList.remove('scroll-up');
+            return;
+        }
+        
+        if (currentScroll > lastScroll && !nav.classList.contains('scroll-down')) {
+            // down
+            nav.classList.remove('scroll-up');
+            nav.classList.add('scroll-down');
+        } else if (currentScroll < lastScroll && nav.classList.contains('scroll-down')) {
+            // up
+            nav.classList.remove('scroll-down');
+            nav.classList.add('scroll-up');
+        }
+        lastScroll = currentScroll;
+    });
+
+    // Mobile menu toggle
+    mobileMenuButton.addEventListener('click', () => {
+        const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
+        mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
+        mobileMenu.classList.toggle('show');
+    });
+</script>

@@ -1,0 +1,259 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-11-23 12:57+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+#: .\project\settings.py:137
+msgid "English"
+msgstr "الإنجليزية"
+
+#: .\project\settings.py:138
+msgid "Arabic"
+msgstr "العربية"
+
+#: .\website\templates\website\auth\login.html:6
+msgid "Login - AfterSails"
+msgstr "تسجيل الدخول - أفترسيلز"
+
+#: .\website\templates\website\auth\login.html:23
+msgid "Sign in to your account"
+msgstr "تسجيل الدخول إلى حسابك"
+
+#: .\website\templates\website\auth\login.html:29
+msgid "Your username and password didn't match. Please try again."
+msgstr "اسم المستخدم وكلمة المرور غير متطابقين. يرجى المحاولة مرة أخرى."
+
+#: .\website\templates\website\auth\login.html:33
+msgid "Username"
+msgstr "اسم المستخدم"
+
+#: .\website\templates\website\auth\login.html:37
+msgid "Password"
+msgstr "كلمة المرور"
+
+#: .\website\templates\website\auth\login.html:46
+msgid "Remember me"
+msgstr "تذكرني"
+
+#: .\website\templates\website\auth\login.html:49
+msgid "Forgot password?"
+msgstr "نسيت كلمة المرور؟"
+
+#: .\website\templates\website\auth\login.html:51
+msgid "Sign in"
+msgstr "تسجيل الدخول"
+
+#: .\website\templates\website\auth\login.html:53
+msgid "Don't have an account yet?"
+msgstr "ليس لديك حساب بعد؟"
+
+#: .\website\templates\website\auth\login.html:53
+msgid "Sign up"
+msgstr "إنشاء حساب"
+
+#: .\website\templates\website\footer.html:16
+#: .\website\templates\website\header.html:60
+msgid "Services"
+msgstr "الخدمات"
+
+#: .\website\templates\website\footer.html:19
+#: .\website\templates\website\header.html:66
+#: .\website\templates\website\index.html:22
+msgid "Book Service"
+msgstr "حجز خدمة"
+
+#: .\website\templates\website\footer.html:22
+msgid "Find Workshop"
+msgstr "البحث عن ورشة"
+
+#: .\website\templates\website\footer.html:27
+msgid "Follow us"
+msgstr "تابعنا"
+
+#: .\website\templates\website\footer.html:30
+msgid "Facebook"
+msgstr "فيسبوك"
+
+#: .\website\templates\website\footer.html:33
+msgid "Twitter"
+msgstr "تويتر"
+
+#: .\website\templates\website\footer.html:38
+msgid "Legal"
+msgstr "قانوني"
+
+#: .\website\templates\website\footer.html:41
+msgid "Privacy Policy"
+msgstr "سياسة الخصوصية"
+
+#: .\website\templates\website\footer.html:44
+msgid "Terms & Conditions"
+msgstr "الشروط والأحكام"
+
+#: .\website\templates\website\footer.html:52
+msgid "All Rights Reserved"
+msgstr "جميع الحقوق محفوظة"
+
+#: .\website\templates\website\header.html:47
+msgid "Open main menu"
+msgstr "فتح القائمة الرئيسية"
+
+#: .\website\templates\website\header.html:57
+msgid "Home"
+msgstr "الرئيسية"
+
+#: .\website\templates\website\header.html:63
+msgid "Workshops"
+msgstr "الورش"
+
+#: .\website\templates\website\header.html:69
+msgid "Contact"
+msgstr "اتصل بنا"
+
+#: .\website\templates\website\header.html:73
+msgid "Dashboard"
+msgstr "لوحة التحكم"
+
+#: .\website\templates\website\header.html:76
+msgid "Logout"
+msgstr "تسجيل الخروج"
+
+#: .\website\templates\website\header.html:80
+msgid "Login"
+msgstr "تسجيل الدخول"
+
+#: .\website\templates\website\index.html:6
+msgid "AutoSahel - Automotive After-Sales Service Platform"
+msgstr "أوتوسهل - منصة خدمات ما بعد البيع للسيارات"
+
+#: .\website\templates\website\index.html:7
+msgid ""
+"Find and book automotive services, manage your workshop, and more with AutoSahel."
+msgstr "ابحث واحجز خدمات السيارات، وأدر ورشتك، والمزيد مع أوتوسهل."
+
+#: .\website\templates\website\index.html:19
+msgid "Your Trusted Automotive Service Platform"
+msgstr "منصة خدمات السيارات الموثوقة"
+
+#: .\website\templates\website\index.html:20
+msgid ""
+"Connect with certified workshops, book services, and manage your automotive "
+"maintenance needs all in one place."
+msgstr "تواصل مع ورش العمل المعتمدة، واحجز الخدمات، وأدر احتياجات صيانة سيارتك في مكان واحد."
+
+#: .\website\templates\website\index.html:26
+msgid "Register Workshop"
+msgstr "تسجيل ورشة"
+
+#: .\website\templates\website\index.html:30
+msgid "car service"
+msgstr "خدمة السيارات"
+
+#: .\website\templates\website\index.html:39
+msgid "Why Choose AutoSahel?"
+msgstr "لماذا تختار أوتوسهل؟"
+
+#: .\website\templates\website\index.html:40
+msgid ""
+"We provide a comprehensive platform for all your automotive after-sales "
+"service needs."
+msgstr "نقدم منصة شاملة لجميع احتياجات خدمات ما بعد البيع للسيارات"
+
+#: .\website\templates\website\index.html:47
+msgid "Certified Workshops"
+msgstr "ورش معتمدة"
+
+#: .\website\templates\website\index.html:48
+msgid "Connect with verified and certified automotive workshops in your area."
+msgstr "تواصل مع ورش السيارات المعتمدة والموثقة في منطقتك"
+
+#: .\website\templates\website\index.html:54
+msgid "Easy Booking"
+msgstr "حجز سهل"
+
+#: .\website\templates\website\index.html:55
+msgid "Book your service appointment with just a few clicks."
+msgstr "احجز موعد خدمتك بنقرات قليلة"
+
+#: .\website\templates\website\index.html:61
+msgid "Workshop Management"
+msgstr "إدارة الورشة"
+
+#: .\website\templates\website\index.html:62
+msgid "Efficiently manage your workshop operations and customer appointments."
+msgstr "إدارة عمليات ورشتك ومواعيد العملاء بكفاءة"
+
+#: .\website\templates\website\index.html:72
+msgid "Start Your Journey Today"
+msgstr "ابدأ رحلتك اليوم"
+
+#: .\website\templates\website\index.html:73
+msgid "Join thousands of satisfied customers and workshops on AutoSahel."
+msgstr "انضم إلى آلاف العملاء وورش العمل الراضين على أوتوسهل."
+
+#: .\website\templates\website\index.html:74
+msgid "Get Started"
+msgstr "ابدأ الآن"
+
+#: .\website\templates\website\index.html:80
+msgid "Quality Service"
+msgstr "خدمة عالية الجودة"
+
+#: .\website\templates\website\index.html:81
+msgid "All our workshops are certified and regularly audited."
+msgstr "جميع ورشنا معتمدة ويتم تدقيقها بانتظام"
+
+#: .\website\templates\website\index.html:87
+msgid "Track Progress"
+msgstr "تتبع التقدم"
+
+#: .\website\templates\website\index.html:88
+msgid "Monitor your service status in real-time."
+msgstr "راقب حالة خدمتك في الوقت الفعلي"
+
+#: .\website\templates\website\services.html:10
+msgid "Oil Change Service"
+msgstr "خدمة تغيير الزيت"
+
+#: .\website\templates\website\services.html:11
+msgid "Professional oil change service"
+msgstr "خدمة احترافية لتغيير زيت المحرك"
+
+#: .\website\templates\website\services.html:15
+msgid "Brake Service"
+msgstr "خدمة الفرامل"
+
+#: .\website\templates\website\services.html:16
+msgid "Complete brake system care"
+msgstr "عناية شاملة بنظام الفرامل"
+
+#: .\website\templates\website\services.html:20
+msgid "Engine Diagnostics"
+msgstr "فحص المحرك"
+
+#: .\website\templates\website\services.html:21
+msgid "Advanced diagnostic testing"
+msgstr "اختبارات تشخيصية متقدمة"
+
+#: .\website\templates\website\services.html:25
+msgid "Tire Service"
+msgstr "خدمة الإطارات"
+
+#: .\website\templates\website\services.html:26
+msgid "Tire maintenance and replacement"
+msgstr "صيانة واستبدال الإطارات"

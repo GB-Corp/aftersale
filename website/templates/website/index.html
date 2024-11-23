@@ -1,0 +1,304 @@
+{% extends "website/base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block head %}
+    <title>{% trans "AutoSahel - Automotive After-Sales Service Platform" %}</title>
+    <meta name="description" content="{% trans 'Find and book automotive services, manage your workshop, and more with AutoSahel.' %}">
+    <style>
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .scale-in {
+            transform: scale(0.95);
+            opacity: 0;
+            transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+        }
+        
+        .scale-in.visible {
+            transform: scale(1);
+            opacity: 1;
+        }
+        
+        /* Service Gallery */
+        .service-gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            padding: 1rem;
+        }
+        
+        .service-card {
+            background: rgba(17, 24, 39, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+            border-color: rgba(96, 165, 250, 0.5);
+            background: rgba(17, 24, 39, 0.9);
+        }
+        
+        .service-icon {
+            width: 3.5rem;
+            height: 3.5rem;
+            margin: 0 auto 1rem;
+            padding: 0.75rem;
+            background: rgba(96, 165, 250, 0.2);
+            border-radius: 1rem;
+            transition: all 0.3s ease;
+            color: rgba(96, 165, 250, 1);
+        }
+        
+        .service-card:hover .service-icon {
+            background: rgba(96, 165, 250, 0.3);
+            transform: scale(1.1);
+        }
+
+        .service-card h3 {
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 0.5rem;
+        }
+
+        .service-card p {
+            color: rgba(209, 213, 219, 0.8);
+        }
+        
+        /* Mobile optimizations */
+        @media (max-width: 768px) {
+            .hero-section {
+                text-align: center;
+                padding: 2rem 1rem;
+            }
+            
+            .hero-buttons {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+                align-items: center;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .service-gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Hover effects */
+        .hover-lift {
+            transition: transform 0.3s ease;
+        }
+        
+        .hover-lift:hover {
+            transform: translateY(-5px);
+        }
+        
+        .hover-scale {
+            transition: transform 0.3s ease;
+        }
+        
+        .hover-scale:hover {
+            transform: scale(1.05);
+        }
+        
+        /* RTL Support */
+        html[dir="rtl"] .hero-buttons a svg {
+            margin-right: 0.5rem;
+            margin-left: -0.25rem;
+            transform: scaleX(-1);
+        }
+        
+        html[dir="rtl"] .hero-buttons a:first-child {
+            margin-right: 0;
+            margin-left: 0.75rem;
+        }
+        
+        .book-service-icon {
+            transition: transform 0.3s ease;
+        }
+        
+        .hover-lift:hover .book-service-icon {
+            transform: translateX(4px);
+        }
+        
+        html[dir="rtl"] .hover-lift:hover .book-service-icon {
+            transform: translateX(-4px);
+        }
+    </style>
+{% endblock %}
+
+{% block header %}
+    {% include 'website/header.html' %}
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="bg-gray-50 dark:bg-gray-800 hero-section">
+    <div class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
+        <div class="mr-auto place-self-center lg:col-span-7 fade-in">
+            <h1 class="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white">{% trans "Your Trusted Automotive Service Platform" %}</h1>
+            <p class="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">{% trans "Connect with certified workshops, book services, and manage your automotive maintenance needs all in one place." %}</p>
+            <div class="hero-buttons">
+                <a href="#" class="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900 hover-lift">
+                    {% trans "Book Service" %}
+                    <svg class="book-service-icon w-5 h-5 {% if LANGUAGE_CODE == 'ar' %}mr-2 -ml-1{% else %}ml-2 -mr-1{% endif %}" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zM3.75 12h.007v.008H3.75V12zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm-.375 5.25h.007v.008H3.75v-.008zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                    </svg>
+                </a>
+                <a href="#" class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800 hover-lift">
+                    {% trans "Register Workshop" %}
+                </a> 
+            </div>
+        </div>
+        <div class="hidden lg:mt-0 lg:col-span-5 lg:flex scale-in">
+            <div class="service-gallery">
+                <!-- Oil Change Service -->
+                <div class="service-card scale-in" style="--delay: 0.1s">
+                    <div class="service-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 01-.923 1.785A5.969 5.969 0 006 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337z" />
+                        </svg>
+                    </div>
+                    <h3 class="mb-2 text-xl font-bold">{% trans "Oil Change Service" %}</h3>
+                    <p>{% trans "Professional oil change service" %}</p>
+                </div>
+                <!-- Brake Service -->
+                <div class="service-card scale-in" style="--delay: 0.2s">
+                    <div class="service-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23-.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" />
+                        </svg>
+                    </div>
+                    <h3 class="mb-2 text-xl font-bold">{% trans "Brake Service" %}</h3>
+                    <p>{% trans "Complete brake system care" %}</p>
+                </div>
+                <!-- Engine Diagnostics -->
+                <div class="service-card scale-in" style="--delay: 0.3s">
+                    <div class="service-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008z" />
+                        </svg>
+                    </div>
+                    <h3 class="mb-2 text-xl font-bold">{% trans "Engine Diagnostics" %}</h3>
+                    <p>{% trans "Advanced diagnostic testing" %}</p>
+                </div>
+                <!-- Tire Service -->
+                <div class="service-card scale-in" style="--delay: 0.4s">
+                    <div class="service-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z" />
+                        </svg>
+                    </div>
+                    <h3 class="mb-2 text-xl font-bold">{% trans "Tire Service" %}</h3>
+                    <p>{% trans "Tire maintenance and replacement" %}</p>
+                </div>
+            </div>
+        </div>                
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="bg-white dark:bg-gray-800">
+    <div class="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
+        <div class="max-w-screen-md mb-8 lg:mb-16 fade-in">
+            <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">{% trans "Why Choose AutoSahel?" %}</h2>
+            <p class="text-gray-500 sm:text-xl dark:text-gray-400">{% trans "We provide a comprehensive platform for all your automotive after-sales service needs." %}</p>
+        </div>
+        <div class="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-12 md:space-y-0 feature-grid">
+            <div class="hover-lift fade-in">
+                <div class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-blue-100 lg:h-12 lg:w-12 dark:bg-blue-900">
+                    <svg class="w-5 h-5 text-blue-600 lg:w-6 lg:h-6 dark:text-blue-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                </div>
+                <h3 class="mb-2 text-xl font-bold dark:text-white">{% trans "Certified Workshops" %}</h3>
+                <p class="text-gray-500 dark:text-gray-400">{% trans "Connect with verified and certified automotive workshops in your area." %}</p>
+            </div>
+            <div class="hover-lift fade-in">
+                <div class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-blue-100 lg:h-12 lg:w-12 dark:bg-blue-900">
+                    <svg class="w-5 h-5 text-blue-600 lg:w-6 lg:h-6 dark:text-blue-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23-.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" />
+                    </svg>
+                </div>
+                <h3 class="mb-2 text-xl font-bold dark:text-white">{% trans "Easy Booking" %}</h3>
+                <p class="text-gray-500 dark:text-gray-400">{% trans "Book your service appointment with just a few clicks." %}</p>
+            </div>
+            <div class="hover-lift fade-in">
+                <div class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-blue-100 lg:h-12 lg:w-12 dark:bg-blue-900">
+                    <svg class="w-5 h-5 text-blue-600 lg:w-6 lg:h-6 dark:text-blue-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd"></path><path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z"></path></svg>
+                </div>
+                <h3 class="mb-2 text-xl font-bold dark:text-white">{% trans "Workshop Management" %}</h3>
+                <p class="text-gray-500 dark:text-gray-400">{% trans "Efficiently manage your workshop operations and customer appointments." %}</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="bg-white dark:bg-gray-900">
+    <div class="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
+        <div class="mx-auto max-w-screen-sm text-center fade-in">
+            <h2 class="mb-4 text-4xl tracking-tight font-extrabold leading-tight text-gray-900 dark:text-white">{% trans "Start Your Journey Today" %}</h2>
+            <p class="mb-6 font-light text-gray-500 dark:text-gray-400 md:text-lg">{% trans "Join thousands of satisfied customers and workshops on AutoSahel." %}</p>
+            <a href="#" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 hover-lift">{% trans "Get Started" %}</a>
+        </div>
+    </div>
+</section>
+
+<script>
+    // Intersection Observer for fade-in animations
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target); // Stop observing once animation is triggered
+            }
+        });
+    }, observerOptions);
+
+    // Observe all fade-in and scale-in elements
+    document.querySelectorAll('.fade-in, .scale-in').forEach((element) => {
+        observer.observe(element);
+    });
+
+    // Add smooth scroll behavior to anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            
+            document.querySelector(targetId).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+</script>
+{% endblock %}
+
+{% block footer %}
+    {% include 'website/footer.html' %}
+{% endblock %}
