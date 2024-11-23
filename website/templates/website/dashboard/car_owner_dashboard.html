@@ -1,0 +1,153 @@
+{% extends "website/dashboard/base_dashboard.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block dashboard_title %}{% trans "Car Owner Dashboard" %}{% endblock %}
+
+{% block sidebar_menu %}
+    <li>
+        <a href="#" class="sidebar-item">
+            <svg class="sidebar-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+            </svg>
+            <span class="sidebar-text">{% trans "Dashboard" %}</span>
+        </a>
+    </li>
+    <li>
+        <a href="#" class="sidebar-item">
+            <svg class="sidebar-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+            <span class="sidebar-text">{% trans "My Vehicles" %}</span>
+        </a>
+    </li>
+    <li>
+        <a href="#" class="sidebar-item">
+            <svg class="sidebar-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            <span class="sidebar-text">{% trans "Service History" %}</span>
+        </a>
+    </li>
+    <li>
+        <a href="#" class="sidebar-item">
+            <svg class="sidebar-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span class="sidebar-text">{% trans "Upcoming Services" %}</span>
+        </a>
+    </li>
+    <li>
+        <a href="#" class="sidebar-item">
+            <svg class="sidebar-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+            </svg>
+            <span class="sidebar-text">{% trans "Payments" %}</span>
+        </a>
+    </li>
+{% endblock %}
+
+{% block dashboard_content %}
+    <!-- Overview Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">{% trans "Active Vehicles" %}</h3>
+            <p class="text-3xl font-bold text-blue-600">2</p>
+        </div>
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">{% trans "Pending Services" %}</h3>
+            <p class="text-3xl font-bold text-yellow-600">1</p>
+        </div>
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">{% trans "Completed Services" %}</h3>
+            <p class="text-3xl font-bold text-green-600">5</p>
+        </div>
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">{% trans "Total Spent" %}</h3>
+            <p class="text-3xl font-bold text-purple-600">$1,250</p>
+        </div>
+    </div>
+
+    <!-- Recent Services -->
+    <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow mb-4">
+        <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">{% trans "Recent Services" %}</h3>
+        <div class="relative overflow-x-auto">
+            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                        <th scope="col" class="px-6 py-3">{% trans "Vehicle" %}</th>
+                        <th scope="col" class="px-6 py-3">{% trans "Service Type" %}</th>
+                        <th scope="col" class="px-6 py-3">{% trans "Date" %}</th>
+                        <th scope="col" class="px-6 py-3">{% trans "Status" %}</th>
+                        <th scope="col" class="px-6 py-3">{% trans "Cost" %}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <td class="px-6 py-4">Toyota Camry</td>
+                        <td class="px-6 py-4">Oil Change</td>
+                        <td class="px-6 py-4">2024-01-15</td>
+                        <td class="px-6 py-4">
+                            <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">
+                                Completed
+                            </span>
+                        </td>
+                        <td class="px-6 py-4">$45.00</td>
+                    </tr>
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <td class="px-6 py-4">Honda Civic</td>
+                        <td class="px-6 py-4">Brake Service</td>
+                        <td class="px-6 py-4">2024-01-10</td>
+                        <td class="px-6 py-4">
+                            <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300">
+                                In Progress
+                            </span>
+                        </td>
+                        <td class="px-6 py-4">$120.00</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Vehicle Health -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+            <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">{% trans "Vehicle Health" %}</h3>
+            <div class="space-y-4">
+                <div>
+                    <div class="flex justify-between mb-1">
+                        <span class="text-sm font-medium text-gray-700 dark:text-white">Oil Life</span>
+                        <span class="text-sm font-medium text-gray-700 dark:text-white">75%</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                        <div class="bg-green-600 h-2.5 rounded-full" style="width: 75%"></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex justify-between mb-1">
+                        <span class="text-sm font-medium text-gray-700 dark:text-white">Tire Health</span>
+                        <span class="text-sm font-medium text-gray-700 dark:text-white">60%</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                        <div class="bg-yellow-400 h-2.5 rounded-full" style="width: 60%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+            <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">{% trans "Upcoming Maintenance" %}</h3>
+            <ul class="space-y-3">
+                <li class="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 dark:bg-gray-700 dark:text-white">
+                    <span class="flex-1 ml-3 whitespace-nowrap">Tire Rotation</span>
+                    <span class="text-sm text-gray-500 dark:text-gray-400">Due in 2 weeks</span>
+                </li>
+                <li class="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 dark:bg-gray-700 dark:text-white">
+                    <span class="flex-1 ml-3 whitespace-nowrap">Air Filter</span>
+                    <span class="text-sm text-gray-500 dark:text-gray-400">Due in 1 month</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+{% endblock %}

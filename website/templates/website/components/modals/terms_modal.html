@@ -1,0 +1,138 @@
+{% load i18n %}
+
+<!-- Terms and Conditions Modal -->
+<div id="terms-modal" class="fixed inset-0 z-50 hidden overflow-y-auto">
+    <div class="min-h-screen px-4 text-center">
+        <!-- Overlay -->
+        <div class="fixed inset-0 bg-gray-900 bg-opacity-50 transition-opacity"></div>
+        
+        <!-- Modal positioning -->
+        <span class="inline-block h-screen align-middle">&#8203;</span>
+        
+        <!-- Modal content -->
+        <div class="inline-block w-full max-w-4xl p-6 my-8 text-left align-middle transition-all transform bg-white dark:bg-gray-800 shadow-xl rounded-2xl">
+            <!-- Header -->
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white">{% trans "Terms and Conditions" %}</h3>
+                <button type="button" class="modal-close text-gray-400 hover:text-gray-500">
+                    <span class="sr-only">Close</span>
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Content -->
+            <div class="prose dark:prose-invert max-w-none">
+                <div class="space-y-6 overflow-y-auto max-h-[60vh] pr-4">
+                    <section>
+                        <h4 class="text-lg font-semibold text-gray-900 dark:text-white">1. {% trans "Introduction" %}</h4>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            {% trans "These Website Standard Terms and Conditions written on this webpage shall manage your use of our website, AutoSahel accessible at www.autosahel.com." %}
+                        </p>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            {% trans "These Terms will be applied fully and affect your use of this Website. By using this Website, you agreed to accept all terms and conditions written in here. You must not use this Website if you disagree with any of these Website Standard Terms and Conditions." %}
+                        </p>
+                    </section>
+
+                    <section>
+                        <h4 class="text-lg font-semibold text-gray-900 dark:text-white">2. {% trans "Intellectual Property Rights" %}</h4>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            {% trans "Other than the content you own, under these Terms, AutoSahel and/or its licensors own all the intellectual property rights and materials contained in this Website." %}
+                        </p>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            {% trans "You are granted limited license only for purposes of viewing the material contained on this Website." %}
+                        </p>
+                    </section>
+
+                    <section>
+                        <h4 class="text-lg font-semibold text-gray-900 dark:text-white">3. {% trans "Restrictions" %}</h4>
+                        <p class="text-gray-700 dark:text-gray-300">{% trans "You are specifically restricted from all of the following:" %}</p>
+                        <ul class="list-disc pl-6 text-gray-700 dark:text-gray-300">
+                            <li>{% trans "publishing any Website material in any other media" %}</li>
+                            <li>{% trans "selling, sublicensing and/or otherwise commercializing any Website material" %}</li>
+                            <li>{% trans "publicly performing and/or showing any Website material" %}</li>
+                            <li>{% trans "using this Website in any way that is or may be damaging to this Website" %}</li>
+                            <li>{% trans "using this Website in any way that impacts user access to this Website" %}</li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h4 class="text-lg font-semibold text-gray-900 dark:text-white">4. {% trans "Your Content" %}</h4>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            {% trans "In these Website Standard Terms and Conditions, 'Your Content' shall mean any audio, video text, images or other material you choose to display on this Website. By displaying Your Content, you grant AutoSahel a non-exclusive, worldwide irrevocable, sub licensable license to use, reproduce, adapt, publish, translate and distribute it in any and all media." %}
+                        </p>
+                    </section>
+
+                    <section>
+                        <h4 class="text-lg font-semibold text-gray-900 dark:text-white">5. {% trans "No warranties" %}</h4>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            {% trans "This Website is provided 'as is,' with all faults, and AutoSahel express no representations or warranties, of any kind related to this Website or the materials contained on this Website." %}
+                        </p>
+                    </section>
+
+                    <section>
+                        <h4 class="text-lg font-semibold text-gray-900 dark:text-white">6. {% trans "Limitation of liability" %}</h4>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            {% trans "In no event shall AutoSahel, nor any of its officers, directors and employees, be held liable for anything arising out of or in any way connected with your use of this Website whether such liability is under contract." %}
+                        </p>
+                    </section>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="mt-6 flex justify-end space-x-3">
+                <button type="button" class="modal-close inline-flex justify-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                    {% trans "Close" %}
+                </button>
+                <button type="button" id="accept-terms" class="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                    {% trans "Accept Terms" %}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const termsModal = document.getElementById('terms-modal');
+    const closeButtons = termsModal.querySelectorAll('.modal-close');
+    const acceptButton = document.getElementById('accept-terms');
+
+    // Close modal functionality
+    closeButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            termsModal.classList.add('hidden');
+        });
+    });
+
+    // Close on click outside
+    termsModal.addEventListener('click', (e) => {
+        if (e.target === termsModal) {
+            termsModal.classList.add('hidden');
+        }
+    });
+
+    // Accept terms functionality
+    acceptButton.addEventListener('click', () => {
+        // Store acceptance in localStorage
+        localStorage.setItem('terms-accepted', 'true');
+        termsModal.classList.add('hidden');
+        
+        // Trigger custom event for terms acceptance
+        const event = new CustomEvent('termsAccepted');
+        document.dispatchEvent(event);
+    });
+});
+
+// Function to show terms modal
+function showTermsModal() {
+    const termsModal = document.getElementById('terms-modal');
+    termsModal.classList.remove('hidden');
+}
+
+// Function to check if terms have been accepted
+function hasAcceptedTerms() {
+    return localStorage.getItem('terms-accepted') === 'true';
+}
+</script>

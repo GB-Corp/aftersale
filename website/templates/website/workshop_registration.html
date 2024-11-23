@@ -1,0 +1,244 @@
+{% load i18n %}
+
+<!-- Workshop Registration Modal -->
+<div id="workshop-modal" class="fixed inset-0 z-50 hidden overflow-y-auto">
+    <div class="min-h-screen px-4 text-center">
+        <div class="fixed inset-0 bg-gray-900 bg-opacity-50 transition-opacity"></div>
+        <span class="inline-block h-screen align-middle">&#8203;</span>
+        <div class="inline-block w-full max-w-4xl p-6 my-8 text-left align-middle transition-all transform bg-white dark:bg-gray-800 shadow-xl rounded-2xl">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white">{% trans "Register Your Workshop" %}</h3>
+                <button type="button" class="modal-close text-gray-400 hover:text-gray-500">
+                    <span class="sr-only">Close</span>
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-content">
+                <!-- Workshop Registration Form Content -->
+                <div class="step-indicator">
+                    <div class="step active">
+                        <div class="step-number">1</div>
+                        <div class="step-title">{% trans "Basic Info" %}</div>
+                    </div>
+                    <div class="step-connector"></div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-title">{% trans "Workshop Details" %}</div>
+                    </div>
+                    <div class="step-connector"></div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-title">{% trans "Documents" %}</div>
+                    </div>
+                    <div class="step-connector"></div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-title">{% trans "Review" %}</div>
+                    </div>
+                </div>
+                <form id="workshop-form" class="space-y-6" method="post" action="{% url 'website:register_workshop' %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-step active">
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">{% trans "Workshop Name" %}</label>
+                                <input type="text" name="workshop_name" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">{% trans "Owner Name" %}</label>
+                                <input type="text" name="owner_name" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">{% trans "Email" %}</label>
+                                <input type="email" name="email" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">{% trans "Phone Number" %}</label>
+                                <input type="tel" name="phone" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-step hidden">
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">{% trans "Workshop Address" %}</label>
+                                <textarea name="address" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600" rows="3"></textarea>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">{% trans "Workshop Type" %}</label>
+                                <select name="workshop_type" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600">
+                                    <option value="">{% trans "Select Type" %}</option>
+                                    <option value="general">{% trans "General Service" %}</option>
+                                    <option value="specialist">{% trans "Specialist" %}</option>
+                                    <option value="body_shop">{% trans "Body Shop" %}</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">{% trans "Services Offered" %}</label>
+                                <div class="mt-2 space-y-2">
+                                    <div class="flex items-center">
+                                        <input type="checkbox" name="services[]" value="oil_change" class="rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                        <label class="ml-2 text-sm text-gray-700 dark:text-gray-300">{% trans "Oil Change" %}</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input type="checkbox" name="services[]" value="tire_service" class="rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                        <label class="ml-2 text-sm text-gray-700 dark:text-gray-300">{% trans "Tire Service" %}</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input type="checkbox" name="services[]" value="brake_service" class="rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                        <label class="ml-2 text-sm text-gray-700 dark:text-gray-300">{% trans "Brake Service" %}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-step hidden">
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">{% trans "Business License" %}</label>
+                                <input type="file" name="business_license" accept=".pdf,.jpg,.jpeg,.png" required class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">{% trans "Workshop Photos" %}</label>
+                                <input type="file" name="workshop_photos" accept="image/*" multiple required class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-step hidden">
+                        <div class="space-y-4">
+                            <h4 class="text-lg font-medium text-gray-900 dark:text-white">{% trans "Review Your Information" %}</h4>
+                            <div id="review-content" class="prose dark:prose-invert">
+                                <!-- Will be populated by JavaScript -->
+                            </div>
+                            <div class="flex items-start">
+                                <input type="checkbox" name="terms_accepted" required class="mt-1 rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                <label class="ml-2 text-sm text-gray-700 dark:text-gray-300">
+                                    {% trans "I agree to the" %} <a href="#" class="text-blue-600 hover:text-blue-700">{% trans "Terms and Conditions" %}</a>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-6 flex justify-between">
+                        <button type="button" class="btn-prev hidden px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                            {% trans "Previous" %}
+                        </button>
+                        <button type="button" class="btn-next px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                            {% trans "Next" %}
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const modal = document.getElementById('workshop-modal');
+        const form = document.getElementById('workshop-form');
+        const nextBtn = document.querySelector('.btn-next');
+        const prevBtn = document.querySelector('.btn-prev');
+        const steps = document.querySelectorAll('.form-step');
+        const stepIndicators = document.querySelectorAll('.step');
+        let currentStep = 0;
+
+        function updateStepDisplay() {
+            steps.forEach((step, index) => {
+                step.classList.toggle('hidden', index !== currentStep);
+                stepIndicators[index].classList.toggle('active', index <= currentStep);
+            });
+            
+            prevBtn.classList.toggle('hidden', currentStep === 0);
+            nextBtn.textContent = currentStep === steps.length - 1 ? '{% trans "Submit" %}' : '{% trans "Next" %}';
+        }
+
+        nextBtn.addEventListener('click', function() {
+            if (currentStep === steps.length - 1) {
+                // Submit form
+                if (form.checkValidity()) {
+                    form.submit();
+                } else {
+                    // Trigger HTML5 validation
+                    form.reportValidity();
+                }
+                return;
+            }
+
+            // Validate current step before proceeding
+            const currentInputs = steps[currentStep].querySelectorAll('input[required], select[required], textarea[required]');
+            let isValid = true;
+            currentInputs.forEach(input => {
+                if (!input.checkValidity()) {
+                    isValid = false;
+                    input.reportValidity();
+                }
+            });
+
+            if (isValid && currentStep < steps.length - 1) {
+                currentStep++;
+                updateStepDisplay();
+                if (currentStep === steps.length - 1) {
+                    populateReview();
+                }
+            }
+        });
+
+        prevBtn.addEventListener('click', function() {
+            if (currentStep > 0) {
+                currentStep--;
+                updateStepDisplay();
+            }
+        });
+
+        function populateReview() {
+            const reviewContent = document.getElementById('review-content');
+            const formData = new FormData(form);
+            let reviewHTML = '<dl class="space-y-4">';
+
+            for (let [key, value] of formData.entries()) {
+                if (key !== 'csrf_token' && value) {
+                    const label = form.querySelector(`label[for="${key}"]`)?.textContent || key;
+                    reviewHTML += `
+                        <div>
+                            <dt class="font-medium">${label}</dt>
+                            <dd class="mt-1">${value}</dd>
+                        </div>
+                    `;
+                }
+            }
+
+            reviewHTML += '</dl>';
+            reviewContent.innerHTML = reviewHTML;
+        }
+
+        // File input preview (if needed)
+        const fileInputs = document.querySelectorAll('input[type="file"]');
+        fileInputs.forEach(input => {
+            input.addEventListener('change', function(e) {
+                const preview = document.createElement('div');
+                preview.className = 'mt-2 grid grid-cols-3 gap-4';
+                
+                [...e.target.files].forEach(file => {
+                    if (file.type.startsWith('image/')) {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            const img = document.createElement('img');
+                            img.src = e.target.result;
+                            img.className = 'h-24 w-24 object-cover rounded-lg';
+                            preview.appendChild(img);
+                        }
+                        reader.readAsDataURL(file);
+                    }
+                });
+
+                const existingPreview = input.parentElement.querySelector('.preview');
+                if (existingPreview) {
+                    existingPreview.remove();
+                }
+                input.parentElement.appendChild(preview);
+            });
+        });
+    });
+</script>

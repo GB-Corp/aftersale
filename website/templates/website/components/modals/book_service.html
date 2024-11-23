@@ -1,0 +1,150 @@
+{% load i18n %}
+
+<!-- Book Service Modal -->
+<div id="book-service-modal" class="fixed inset-0 z-50 hidden overflow-y-auto">
+    <div class="min-h-screen px-4 text-center">
+        <!-- Overlay -->
+        <div class="fixed inset-0 bg-gray-900 bg-opacity-50 transition-opacity"></div>
+        
+        <!-- Modal positioning -->
+        <span class="inline-block h-screen align-middle">&#8203;</span>
+        
+        <!-- Modal content -->
+        <div class="inline-block w-full max-w-2xl p-6 my-8 text-left align-middle transition-all transform bg-white dark:bg-gray-800 shadow-xl rounded-2xl">
+            <!-- Header -->
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white">{% trans "Book a Service" %}</h3>
+                <button type="button" class="modal-close text-gray-400 hover:text-gray-500">
+                    <span class="sr-only">Close</span>
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Form -->
+            <form id="book-service-form" class="space-y-6">
+                <!-- Service Selection -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        {% trans "Select Service" %}
+                    </label>
+                    <select class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
+                        <option value="oil-change">{% trans "Oil Change" %}</option>
+                        <option value="engine-diagnostics">{% trans "Engine Diagnostics" %}</option>
+                        <option value="tire-service">{% trans "Tire Service" %}</option>
+                        <option value="brake-service">{% trans "Brake Service" %}</option>
+                    </select>
+                </div>
+
+                <!-- Vehicle Information -->
+                <div class="space-y-4">
+                    <h4 class="text-lg font-semibold text-gray-900 dark:text-white">{% trans "Vehicle Information" %}</h4>
+                    
+                    <div class="grid grid-cols-2 gap-4">
+                        <!-- Make -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                {% trans "Make" %}
+                            </label>
+                            <input type="text" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white" required>
+                        </div>
+
+                        <!-- Model -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                {% trans "Model" %}
+                            </label>
+                            <input type="text" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white" required>
+                        </div>
+
+                        <!-- Year -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                {% trans "Year" %}
+                            </label>
+                            <input type="number" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white" required>
+                        </div>
+
+                        <!-- Mileage -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                {% trans "Mileage" %}
+                            </label>
+                            <input type="number" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Preferred Date and Time -->
+                <div class="space-y-4">
+                    <h4 class="text-lg font-semibold text-gray-900 dark:text-white">{% trans "Preferred Schedule" %}</h4>
+                    
+                    <div class="grid grid-cols-2 gap-4">
+                        <!-- Date -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                {% trans "Date" %}
+                            </label>
+                            <input type="date" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white" required>
+                        </div>
+
+                        <!-- Time -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                {% trans "Time" %}
+                            </label>
+                            <input type="time" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional Notes -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        {% trans "Additional Notes" %}
+                    </label>
+                    <textarea rows="3" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white resize-none"></textarea>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="flex justify-end mt-6">
+                    <button type="submit" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                        {% trans "Book Now" %}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Success Modal -->
+<div id="booking-success-modal" class="fixed inset-0 z-50 hidden overflow-y-auto">
+    <div class="min-h-screen px-4 text-center">
+        <div class="fixed inset-0 bg-gray-900 bg-opacity-50 transition-opacity"></div>
+        <span class="inline-block h-screen align-middle">&#8203;</span>
+        
+        <div class="inline-block w-full max-w-md p-6 my-8 text-center align-middle transition-all transform bg-white dark:bg-gray-800 shadow-xl rounded-2xl">
+            <!-- Success Icon -->
+            <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100 dark:bg-green-900 mb-4">
+                <svg class="h-6 w-6 text-green-600 dark:text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+            </div>
+            
+            <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-2">
+                {% trans "Booking Successful!" %}
+            </h3>
+            
+            <p class="text-sm text-gray-500 dark:text-gray-400 mb-6">
+                {% trans "Your service has been booked successfully. We'll send you a confirmation email with all the details." %}
+            </p>
+            
+            <div class="mt-6">
+                <button type="button" class="modal-close inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                    {% trans "Got it, thanks!" %}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

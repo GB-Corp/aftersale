@@ -22,35 +22,21 @@ from django.views.generic import RedirectView
 
 from project import settings
 
+# Non-translatable URLs
 urlpatterns = [
-                  path('dzJAMvwB/', admin.site.urls),
-                  path(
-                      'password_reset/',
-                      auth_views.PasswordResetView.as_view(),
-                      name='admin_password_reset',
-                  ),
-                  path(
-                      'password_reset/done/',
-                      auth_views.PasswordResetDoneView.as_view(),
-                      name='password_reset_done',
-                  ),
-                  path(
-                      'reset/<uidb64>/<token>/',
-                      auth_views.PasswordResetConfirmView.as_view(),
-                      name='password_reset_confirm',
-                  ),
-                  path(
-                      'reset/done/',
-                      auth_views.PasswordResetCompleteView.as_view(),
-                      name='password_reset_complete',
-                  ),
-                  path('accounts/login/', RedirectView.as_view(url='/admin/', permanent=False)),
-                  path('api/v1/', include('api.urls')),
-                  path('i18n/', include('django.conf.urls.i18n')),
-              ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path('dzJAMvwB/', admin.site.urls),
+    path('api/v1/', include('api.urls')),
+    path('i18n/', include('django.conf.urls.i18n')),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
+# Translatable URLs
 urlpatterns += i18n_patterns(
     path('', include('website.urls')),
+    path('password_reset/', auth_views.PasswordResetView.as_view(), name='admin_password_reset'),
+    path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
+    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
+    path('reset/done/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
+    path('accounts/login/', RedirectView.as_view(url='/admin/', permanent=False)),
     prefix_default_language=False
 )
 

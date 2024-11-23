@@ -1,0 +1,166 @@
+{% load i18n %}
+
+<!-- Notification Modal -->
+<div id="notification-modal" class="fixed inset-0 z-50 hidden overflow-y-auto">
+    <div class="min-h-screen px-4 text-center">
+        <!-- Overlay -->
+        <div class="fixed inset-0 bg-gray-900 bg-opacity-50 transition-opacity"></div>
+        
+        <!-- Modal positioning -->
+        <span class="inline-block h-screen align-middle">&#8203;</span>
+        
+        <!-- Modal content -->
+        <div class="inline-block w-full max-w-md p-6 my-8 text-center align-middle transition-all transform bg-white dark:bg-gray-800 shadow-xl rounded-2xl">
+            <!-- Icon -->
+            <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full mb-4">
+                <!-- Success Icon -->
+                <div class="notification-icon success hidden bg-green-100 dark:bg-green-900">
+                    <svg class="h-6 w-6 text-green-600 dark:text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                </div>
+                
+                <!-- Error Icon -->
+                <div class="notification-icon error hidden bg-red-100 dark:bg-red-900">
+                    <svg class="h-6 w-6 text-red-600 dark:text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </div>
+                
+                <!-- Warning Icon -->
+                <div class="notification-icon warning hidden bg-yellow-100 dark:bg-yellow-900">
+                    <svg class="h-6 w-6 text-yellow-600 dark:text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                    </svg>
+                </div>
+                
+                <!-- Info Icon -->
+                <div class="notification-icon info hidden bg-blue-100 dark:bg-blue-900">
+                    <svg class="h-6 w-6 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </div>
+            </div>
+            
+            <!-- Title -->
+            <h3 id="notification-title" class="text-lg font-medium text-gray-900 dark:text-white mb-2"></h3>
+            
+            <!-- Message -->
+            <p id="notification-message" class="text-sm text-gray-500 dark:text-gray-400 mb-6"></p>
+            
+            <!-- Buttons -->
+            <div class="mt-6 flex justify-center space-x-3">
+                <button type="button" id="notification-confirm" class="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                    {% trans "Confirm" %}
+                </button>
+                <button type="button" id="notification-cancel" class="inline-flex justify-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                    {% trans "Cancel" %}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+class NotificationModal {
+    constructor() {
+        this.modal = document.getElementById('notification-modal');
+        this.title = document.getElementById('notification-title');
+        this.message = document.getElementById('notification-message');
+        this.confirmBtn = document.getElementById('notification-confirm');
+        this.cancelBtn = document.getElementById('notification-cancel');
+        this.icons = {
+            success: document.querySelector('.notification-icon.success'),
+            error: document.querySelector('.notification-icon.error'),
+            warning: document.querySelector('.notification-icon.warning'),
+            info: document.querySelector('.notification-icon.info')
+        };
+        
+        this.setupEventListeners();
+    }
+
+    setupEventListeners() {
+        // Close modal when clicking outside
+        this.modal.addEventListener('click', (e) => {
+            if (e.target === this.modal) {
+                this.hide();
+            }
+        });
+
+        // Default cancel button behavior
+        this.cancelBtn.addEventListener('click', () => this.hide());
+    }
+
+    show(options = {}) {
+        const {
+            type = 'info',
+            title = '',
+            message = '',
+            showCancel = true,
+            confirmText = '{% trans "Confirm" %}',
+            cancelText = '{% trans "Cancel" %}',
+            onConfirm = () => {},
+            onCancel = () => {}
+        } = options;
+
+        // Set content
+        this.title.textContent = title;
+        this.message.textContent = message;
+        
+        // Show/hide icons
+        Object.entries(this.icons).forEach(([iconType, icon]) => {
+            icon.classList.toggle('hidden', iconType !== type);
+        });
+
+        // Configure buttons
+        this.confirmBtn.textContent = confirmText;
+        this.cancelBtn.textContent = cancelText;
+        this.cancelBtn.style.display = showCancel ? 'inline-flex' : 'none';
+
+        // Set button handlers
+        this.confirmBtn.onclick = () => {
+            onConfirm();
+            this.hide();
+        };
+        this.cancelBtn.onclick = () => {
+            onCancel();
+            this.hide();
+        };
+
+        // Show modal
+        this.modal.classList.remove('hidden');
+    }
+
+    hide() {
+        this.modal.classList.add('hidden');
+    }
+
+    success(title, message, options = {}) {
+        this.show({ type: 'success', title, message, ...options });
+    }
+
+    error(title, message, options = {}) {
+        this.show({ type: 'error', title, message, ...options });
+    }
+
+    warning(title, message, options = {}) {
+        this.show({ type: 'warning', title, message, ...options });
+    }
+
+    info(title, message, options = {}) {
+        this.show({ type: 'info', title, message, ...options });
+    }
+}
+
+// Initialize notification modal
+window.notificationModal = new NotificationModal();
+
+// Example usage:
+// window.notificationModal.success('Success!', 'Your action was completed successfully.');
+// window.notificationModal.error('Error!', 'Something went wrong. Please try again.');
+// window.notificationModal.warning('Warning!', 'Are you sure you want to proceed?', {
+//     onConfirm: () => console.log('Confirmed'),
+//     onCancel: () => console.log('Cancelled')
+// });
+// window.notificationModal.info('Info', 'Here is some important information.');
+</script>

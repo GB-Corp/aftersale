@@ -17,24 +17,71 @@
     <link rel="icon" href="{% static 'images/logo.png' %}"/>
     <script src="{% static 'js/tailwindcss-3.3.1.js' %}"></script>
     <link href="{% static 'css/flowbite@1.6.5.min.css' %}" rel="stylesheet"/>
+    <link href="{% static 'css/metallic.css' %}" rel="stylesheet"/>
     <script src="{% static 'js/flowbite@1.6.5.min.js' %}"></script>
     <script class="jsbin" src="{% static 'js/jquery-3.6.3.min.js' %}"></script>
     <script src="{% static 'js/spritespin.js' %}"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
     <script src="{% static 'js/scripts.js' %}"></script>
+    <style>
+        body {
+            font-family: 'Lexend', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            overflow-y: auto;
+            position: relative;
+        }
+        
+        .dark body {
+            background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+        }
+        
+        main {
+            flex: 1 0 auto;
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            overflow-x: hidden;
+            overflow-y: visible;
+        }
+
+        footer {
+            flex-shrink: 0;
+            position: relative;
+            z-index: 2;
+            width: 100%;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            overflow-y: scroll;
+        }
+    </style>
 </head>
-<body>
+<body class="metallic-bg">
+    <main>
+        {% block header %}
 
-{% block header %}
+        {% endblock %}
 
-{% endblock %}
+        {% block content %}
 
-{% block content %}
+        {% endblock %}
+    </main>
 
-{% endblock %}
+    <footer>
+        {% block footer %}
 
-{% block footer %}
+        {% endblock %}
+    </footer>
 
-{% endblock %}
+    {% block extra_js %}
+    {% endblock %}
 </body>
 </html>

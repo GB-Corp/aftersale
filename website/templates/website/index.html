@@ -1,4 +1,4 @@
-{% extends "website/base.html" %}
+{% extends "website/main.html" %}
 {% load static %}
 {% load i18n %}
 
@@ -10,7 +10,9 @@
         .fade-in {
             opacity: 0;
             transform: translateY(20px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                        transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: transform, opacity;
         }
         
         .fade-in.visible {
@@ -21,7 +23,9 @@
         .scale-in {
             transform: scale(0.95);
             opacity: 0;
-            transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                        opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: transform, opacity;
         }
         
         .scale-in.visible {
@@ -38,21 +42,33 @@
         }
         
         .service-card {
-            background: rgba(17, 24, 39, 0.8);
+            background: linear-gradient(
+                145deg,
+                rgba(17, 24, 39, 0.8) 0%,
+                rgba(17, 24, 39, 0.9) 100%
+            );
             backdrop-filter: blur(10px);
             border-radius: 1rem;
             padding: 1.5rem;
             text-align: center;
             transition: all 0.3s ease;
             border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 
+                0 4px 6px rgba(0, 0, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
         }
         
         .service-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 
+                0 10px 15px rgba(0, 0, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
             border-color: rgba(96, 165, 250, 0.5);
-            background: rgba(17, 24, 39, 0.9);
+            background: linear-gradient(
+                145deg,
+                rgba(17, 24, 39, 0.85) 0%,
+                rgba(17, 24, 39, 0.95) 100%
+            );
         }
         
         .service-icon {
@@ -64,13 +80,45 @@
             border-radius: 1rem;
             transition: all 0.3s ease;
             color: rgba(96, 165, 250, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-icon::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(
+                circle,
+                rgba(96, 165, 250, 0.1) 0%,
+                transparent 70%
+            );
+            animation: icon-shine 3s ease-in-out infinite;
+        }
+        
+        @keyframes icon-shine {
+            0% {
+                transform: scale(1) rotate(0deg);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.2) rotate(180deg);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1) rotate(360deg);
+                opacity: 0;
+            }
         }
         
         .service-card:hover .service-icon {
             background: rgba(96, 165, 250, 0.3);
             transform: scale(1.1);
         }
-
+        
         .service-card h3 {
             color: rgba(255, 255, 255, 0.95);
             margin-bottom: 0.5rem;
@@ -144,6 +192,66 @@
         html[dir="rtl"] .hover-lift:hover .book-service-icon {
             transform: translateX(-4px);
         }
+        
+        .metallic-button {
+            background: linear-gradient(
+                145deg,
+                rgba(17, 24, 39, 0.8) 0%,
+                rgba(17, 24, 39, 0.9) 100%
+            );
+            backdrop-filter: blur(10px);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 
+                0 4px 6px rgba(0, 0, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        }
+        
+        .metallic-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 
+                0 10px 15px rgba(0, 0, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            border-color: rgba(96, 165, 250, 0.5);
+            background: linear-gradient(
+                145deg,
+                rgba(17, 24, 39, 0.85) 0%,
+                rgba(17, 24, 39, 0.95) 100%
+            );
+        }
+        
+        .metallic-card {
+            background: linear-gradient(
+                145deg,
+                rgba(17, 24, 39, 0.8) 0%,
+                rgba(17, 24, 39, 0.9) 100%
+            );
+            backdrop-filter: blur(10px);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 
+                0 4px 6px rgba(0, 0, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        }
+        
+        .metallic-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 
+                0 10px 15px rgba(0, 0, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            border-color: rgba(96, 165, 250, 0.5);
+            background: linear-gradient(
+                145deg,
+                rgba(17, 24, 39, 0.85) 0%,
+                rgba(17, 24, 39, 0.95) 100%
+            );
+        }
     </style>
 {% endblock %}
 
@@ -159,21 +267,24 @@
             <h1 class="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white">{% trans "Your Trusted Automotive Service Platform" %}</h1>
             <p class="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">{% trans "Connect with certified workshops, book services, and manage your automotive maintenance needs all in one place." %}</p>
             <div class="hero-buttons">
-                <a href="#" class="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900 hover-lift">
+                <a href="#" class="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900 hover-lift metallic-button">
                     {% trans "Book Service" %}
                     <svg class="book-service-icon w-5 h-5 {% if LANGUAGE_CODE == 'ar' %}mr-2 -ml-1{% else %}ml-2 -mr-1{% endif %}" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zM3.75 12h.007v.008H3.75V12zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm-.375 5.25h.007v.008H3.75v-.008zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
                     </svg>
                 </a>
-                <a href="#" class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800 hover-lift">
+                <a href="#" data-register-workshop class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800 metallic-button">
                     {% trans "Register Workshop" %}
-                </a> 
+                    <svg class="workshop-icon w-5 h-5 {% if LANGUAGE_CODE == 'ar' %}mr-2 -ml-1{% else %}ml-2 -mr-1{% endif %}" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z" />
+                    </svg>
+                </a>
             </div>
         </div>
         <div class="hidden lg:mt-0 lg:col-span-5 lg:flex scale-in">
             <div class="service-gallery">
                 <!-- Oil Change Service -->
-                <div class="service-card scale-in" style="--delay: 0.1s">
+                <div class="service-card scale-in metallic-card" style="--delay: 0.1s">
                     <div class="service-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 01-.923 1.785A5.969 5.969 0 006 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337z" />
@@ -183,39 +294,41 @@
                     <p>{% trans "Professional oil change service" %}</p>
                 </div>
                 <!-- Brake Service -->
-                <div class="service-card scale-in" style="--delay: 0.2s">
+                <div class="service-card scale-in metallic-card" style="--delay: 0.2s">
                     <div class="service-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23-.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" />
-                        </svg>
-                    </div>
-                    <h3 class="mb-2 text-xl font-bold">{% trans "Brake Service" %}</h3>
-                    <p>{% trans "Complete brake system care" %}</p>
+                    </svg>
+                </div>
+                <h3 class="mb-2 text-xl font-bold">{% trans "Brake Service" %}</h3>
+                <p>{% trans "Complete brake system care" %}</p>
                 </div>
                 <!-- Engine Diagnostics -->
-                <div class="service-card scale-in" style="--delay: 0.3s">
+                <div class="service-card scale-in metallic-card" style="--delay: 0.3s">
                     <div class="service-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008z" />
-                        </svg>
-                    </div>
-                    <h3 class="mb-2 text-xl font-bold">{% trans "Engine Diagnostics" %}</h3>
-                    <p>{% trans "Advanced diagnostic testing" %}</p>
+                    </svg>
+                </div>
+                <h3 class="mb-2 text-xl font-bold">{% trans "Engine Diagnostics" %}</h3>
+                <p>{% trans "Advanced diagnostic testing" %}</p>
                 </div>
                 <!-- Tire Service -->
-                <div class="service-card scale-in" style="--delay: 0.4s">
+                <div class="service-card scale-in metallic-card" style="--delay: 0.4s">
                     <div class="service-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z" />
-                        </svg>
-                    </div>
-                    <h3 class="mb-2 text-xl font-bold">{% trans "Tire Service" %}</h3>
-                    <p>{% trans "Tire maintenance and replacement" %}</p>
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076-.124a6.57 6.57 0 01-.22-.128c-.331-.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z" />
+                    </svg>
+                </div>
+                <h3 class="mb-2 text-xl font-bold">{% trans "Tire Service" %}</h3>
+                <p>{% trans "Tire maintenance and replacement" %}</p>
                 </div>
             </div>
         </div>                
     </div>
 </section>
+
+{% include 'website/workshop_registration.html' %}
 
 <!-- Features Section -->
 <section class="bg-white dark:bg-gray-800">
@@ -234,15 +347,14 @@
             </div>
             <div class="hover-lift fade-in">
                 <div class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-blue-100 lg:h-12 lg:w-12 dark:bg-blue-900">
-                    <svg class="w-5 h-5 text-blue-600 lg:w-6 lg:h-6 dark:text-blue-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23-.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" />
-                    </svg>
+                    <svg class="w-5 h-5 text-blue-600 lg:w-6 lg:h-6 dark:text-blue-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path></svg>
                 </div>
                 <h3 class="mb-2 text-xl font-bold dark:text-white">{% trans "Easy Booking" %}</h3>
                 <p class="text-gray-500 dark:text-gray-400">{% trans "Book your service appointment with just a few clicks." %}</p>
             </div>
             <div class="hover-lift fade-in">
                 <div class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-blue-100 lg:h-12 lg:w-12 dark:bg-blue-900">
-                    <svg class="w-5 h-5 text-blue-600 lg:w-6 lg:h-6 dark:text-blue-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd"></path><path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z"></path></svg>
+                    <svg class="w-5 h-5 text-blue-600 lg:w-6 lg:h-6 dark:text-blue-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-1v2a1 1 0 01-1 1H7v1a1 1 0 01-1 1H3v-2a2 2 0 012-2h3v-1a1 1 0 011-1h1a2 2 0 012 2v12a2 2 0 002 2h1a2 2 0 002-2V7a1 1 0 01 1-1h1a1 1 0 011 1v2a2 2 0 012 2h1a2 2 0 002-2V9a1 1 0 01 1-1h1a1 1 0 011 1v2a1 1 0 01-1 1h-1v1a1 1 0 01-1 1H7v1a1 1 0 01-1 1h-2a2 2 0 01-2-2V7z" clip-rule="evenodd"></path></svg>
                 </div>
                 <h3 class="mb-2 text-xl font-bold dark:text-white">{% trans "Workshop Management" %}</h3>
                 <p class="text-gray-500 dark:text-gray-400">{% trans "Efficiently manage your workshop operations and customer appointments." %}</p>
@@ -266,35 +378,100 @@
     // Intersection Observer for fade-in animations
     const observerOptions = {
         root: null,
-        rootMargin: '0px',
-        threshold: 0.1
+        rootMargin: '20px',
+        threshold: [0.15, 0.5, 0.75]  // Multiple thresholds for smoother transitions
     };
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                observer.unobserve(entry.target); // Stop observing once animation is triggered
+                // Add small delay for sequential animations
+                const delay = entry.target.getAttribute('data-delay') || 0;
+                setTimeout(() => {
+                    entry.target.classList.add('visible');
+                }, delay);
+                
+                // Only unobserve if the element is fully visible
+                if (entry.intersectionRatio > 0.75) {
+                    observer.unobserve(entry.target);
+                }
             }
         });
     }, observerOptions);
 
-    // Observe all fade-in and scale-in elements
-    document.querySelectorAll('.fade-in, .scale-in').forEach((element) => {
+    // Add sequential delays to elements
+    document.querySelectorAll('.fade-in, .scale-in').forEach((element, index) => {
+        element.setAttribute('data-delay', index * 100);  // 100ms delay between each element
         observer.observe(element);
     });
 
-    // Add smooth scroll behavior to anchor links
+    // Improved smooth scroll behavior
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
             const targetId = this.getAttribute('href');
             if (targetId === '#') return;
             
-            document.querySelector(targetId).scrollIntoView({
+            const targetElement = document.querySelector(targetId);
+            const headerOffset = 80; // Adjust based on your header height
+            const elementPosition = targetElement.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+            window.scrollTo({
+                top: offsetPosition,
                 behavior: 'smooth'
             });
         });
+    });
+    
+    // Modal functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        const registerBtn = document.querySelector('[data-register-workshop]');
+        
+        registerBtn.addEventListener('click', function() {
+            const modal = document.getElementById('workshop-modal');
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        });
+        
+        // Close modal when clicking outside
+        document.addEventListener('click', function(e) {
+            const modal = document.getElementById('workshop-modal');
+            if (e.target === modal) {
+                modal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }
+        });
+        
+        // Form navigation
+        const form = document.getElementById('workshop-form');
+        const nextBtn = document.querySelector('.btn-next');
+        const prevBtn = document.querySelector('.btn-prev');
+        const steps = document.querySelectorAll('.step');
+        let currentStep = 0;
+        
+        nextBtn.addEventListener('click', function() {
+            if (currentStep < steps.length - 1) {
+                steps[currentStep].classList.remove('active');
+                steps[currentStep + 1].classList.add('active');
+                currentStep++;
+                updateNavButtons();
+            }
+        });
+        
+        prevBtn.addEventListener('click', function() {
+            if (currentStep > 0) {
+                steps[currentStep].classList.remove('active');
+                steps[currentStep - 1].classList.add('active');
+                currentStep--;
+                updateNavButtons();
+            }
+        });
+        
+        function updateNavButtons() {
+            prevBtn.classList.toggle('hidden', currentStep === 0);
+            nextBtn.textContent = currentStep === steps.length - 1 ? '{% trans "Submit" %}' : '{% trans "Next" %}';
+        }
     });
 </script>
 {% endblock %}

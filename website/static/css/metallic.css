@@ -1,0 +1,275 @@
+/* Metallic Effect Styles */
+:root {
+    --metallic-primary: 96, 165, 250;
+    --metallic-secondary: 59, 130, 246;
+    --metallic-accent: 147, 197, 253;
+}
+
+/* Metallic Background Effect */
+.metallic-bg {
+    background: linear-gradient(
+        135deg,
+        #1a1f2c 0%,
+        #2d3748 50%,
+        #1a1f2c 100%
+    );
+    position: relative;
+    overflow: hidden;
+}
+
+.metallic-bg::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+        circle,
+        rgba(255, 255, 255, 0.1) 0%,
+        transparent 60%
+    );
+    animation: rotate-bg 20s linear infinite;
+}
+
+@keyframes rotate-bg {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Metallic Card Effect */
+.metallic-card {
+    background: linear-gradient(
+        145deg,
+        rgba(23, 25, 35, 0.9) 0%,
+        rgba(38, 41, 56, 0.95) 50%,
+        rgba(23, 25, 35, 0.9) 100%
+    );
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 
+        0 4px 6px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.metallic-card::before {
+    content: '';
+    position: absolute;
+    top: -150%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent
+    );
+    transform: rotate(45deg);
+    animation: shine 3s infinite;
+}
+
+@keyframes shine {
+    0% {
+        top: -150%;
+    }
+    100% {
+        top: 150%;
+    }
+}
+
+.metallic-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    background: linear-gradient(
+        145deg,
+        rgba(28, 30, 44, 0.95) 0%,
+        rgba(45, 49, 66, 0.98) 50%,
+        rgba(28, 30, 44, 0.95) 100%
+    );
+    border-color: rgba(96, 165, 250, 0.5);
+    box-shadow: 
+        0 10px 20px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15),
+        0 0 20px rgba(96, 165, 250, 0.2);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Metallic Button Effect */
+.metallic-button {
+    background: linear-gradient(
+        145deg,
+        rgba(37, 99, 235, 0.9) 0%,
+        rgba(59, 130, 246, 0.95) 50%,
+        rgba(37, 99, 235, 0.9) 100%
+    );
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 
+        0 4px 6px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.metallic-button::before {
+    content: '';
+    position: absolute;
+    top: -100%;
+    left: -100%;
+    width: 300%;
+    height: 300%;
+    background: linear-gradient(
+        45deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    transform: rotate(45deg);
+    animation: button-shine 4s infinite;
+}
+
+@keyframes button-shine {
+    0% {
+        top: -100%;
+        left: -100%;
+    }
+    100% {
+        top: 100%;
+        left: 100%;
+    }
+}
+
+.metallic-button:hover {
+    transform: translateY(-2px) scale(1.05);
+    background: linear-gradient(
+        145deg,
+        rgba(29, 78, 216, 0.95) 0%,
+        rgba(37, 99, 235, 0.98) 50%,
+        rgba(29, 78, 216, 0.95) 100%
+    );
+    box-shadow: 
+        0 8px 15px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.25),
+        0 0 20px rgba(37, 99, 235, 0.3);
+}
+
+/* Metallic Text Effect */
+.metallic-text {
+    background: linear-gradient(
+        135deg,
+        rgb(var(--metallic-primary)) 0%,
+        rgb(var(--metallic-secondary)) 50%,
+        rgb(var(--metallic-accent)) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Service Icon Effect */
+.service-icon {
+    background: rgba(96, 165, 250, 0.15);
+    border-radius: 1rem;
+    padding: 0.75rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.service-icon::before,
+.service-icon::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+        circle,
+        rgba(96, 165, 250, 0.2) 0%,
+        transparent 70%
+    );
+    animation: icon-pulse 3s ease-in-out infinite;
+}
+
+.service-icon::after {
+    animation-delay: 1.5s;
+}
+
+@keyframes icon-pulse {
+    0% {
+        transform: scale(1) rotate(0deg);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.5) rotate(180deg);
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(1) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+.service-icon:hover {
+    transform: scale(1.1) rotate(5deg);
+    background: rgba(96, 165, 250, 0.25);
+    box-shadow: 
+        inset 0 1px 0 rgba(255, 255, 255, 0.2),
+        0 6px 10px rgba(0, 0, 0, 0.2),
+        0 0 15px rgba(96, 165, 250, 0.3);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Workshop Icon Styles */
+.workshop-icon {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[dir="ltr"] .metallic-button:hover .workshop-icon {
+    transform: translateX(4px) rotate(15deg);
+}
+
+[dir="rtl"] .metallic-button:hover .workshop-icon {
+    transform: translateX(-4px) rotate(-15deg);
+}
+
+/* Icon positioning for RTL */
+[dir="rtl"] .workshop-icon,
+[dir="rtl"] .book-service-icon {
+    transform: scaleX(-1);
+}
+
+[dir="rtl"] .metallic-button:hover .book-service-icon {
+    transform: translateX(-4px) scaleX(-1);
+}
+
+/* Dark Mode Adjustments */
+.dark .metallic-card {
+    background: linear-gradient(
+        145deg,
+        rgba(17, 24, 39, 0.9) 0%,
+        rgba(17, 24, 39, 0.7) 100%
+    );
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark .metallic-bg::before {
+    opacity: 0.5;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .metallic-bg::before {
+        animation: metallic-shimmer 20s linear infinite;
+    }
+}

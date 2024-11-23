@@ -1,0 +1,187 @@
+{% extends "website/dashboard/base_dashboard.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block dashboard_title %}{% trans "Service Advisor Dashboard" %}{% endblock %}
+
+{% block sidebar_menu %}
+    <li>
+        <a href="#" class="sidebar-item">
+            <svg class="sidebar-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+            </svg>
+            <span class="sidebar-text">{% trans "Dashboard" %}</span>
+        </a>
+    </li>
+    <li>
+        <a href="#" class="sidebar-item">
+            <svg class="sidebar-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span class="sidebar-text">{% trans "Appointments" %}</span>
+        </a>
+    </li>
+    <li>
+        <a href="#" class="sidebar-item">
+            <svg class="sidebar-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+            </svg>
+            <span class="sidebar-text">{% trans "Service Orders" %}</span>
+        </a>
+    </li>
+    <li>
+        <a href="#" class="sidebar-item">
+            <svg class="sidebar-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" />
+            </svg>
+            <span class="sidebar-text">{% trans "Customer Messages" %}</span>
+        </a>
+    </li>
+    <li>
+        <a href="#" class="sidebar-item">
+            <svg class="sidebar-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+            </svg>
+            <span class="sidebar-text">{% trans "Estimates" %}</span>
+        </a>
+    </li>
+{% endblock %}
+
+{% block dashboard_content %}
+    <!-- Quick Actions -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+        <button class="flex items-center justify-center p-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+            </svg>
+            {% trans "New Service Order" %}
+        </button>
+        <button class="flex items-center justify-center p-4 bg-green-600 text-white rounded-lg hover:bg-green-700">
+            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            {% trans "Schedule Appointment" %}
+        </button>
+        <button class="flex items-center justify-center p-4 bg-purple-600 text-white rounded-lg hover:bg-purple-700">
+            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+            </svg>
+            {% trans "Quick Vehicle Lookup" %}
+        </button>
+    </div>
+
+    <!-- Stats Overview -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">{% trans "Today's Appointments" %}</h3>
+            <p class="text-3xl font-bold text-blue-600">8</p>
+        </div>
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">{% trans "Pending Estimates" %}</h3>
+            <p class="text-3xl font-bold text-yellow-600">5</p>
+        </div>
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">{% trans "Active Services" %}</h3>
+            <p class="text-3xl font-bold text-green-600">12</p>
+        </div>
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">{% trans "Unread Messages" %}</h3>
+            <p class="text-3xl font-bold text-red-600">3</p>
+        </div>
+    </div>
+
+    <!-- Today's Schedule -->
+    <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow mb-4">
+        <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">{% trans "Today's Schedule" %}</h3>
+        <div class="relative overflow-x-auto">
+            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                        <th scope="col" class="px-6 py-3">{% trans "Time" %}</th>
+                        <th scope="col" class="px-6 py-3">{% trans "Customer" %}</th>
+                        <th scope="col" class="px-6 py-3">{% trans "Vehicle" %}</th>
+                        <th scope="col" class="px-6 py-3">{% trans "Service" %}</th>
+                        <th scope="col" class="px-6 py-3">{% trans "Status" %}</th>
+                        <th scope="col" class="px-6 py-3">{% trans "Actions" %}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <td class="px-6 py-4">09:00 AM</td>
+                        <td class="px-6 py-4">John Smith</td>
+                        <td class="px-6 py-4">Toyota Camry 2020</td>
+                        <td class="px-6 py-4">Oil Change</td>
+                        <td class="px-6 py-4">
+                            <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">
+                                In Progress
+                            </span>
+                        </td>
+                        <td class="px-6 py-4">
+                            <button class="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300">View Details</button>
+                        </td>
+                    </tr>
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <td class="px-6 py-4">10:30 AM</td>
+                        <td class="px-6 py-4">Sarah Johnson</td>
+                        <td class="px-6 py-4">Honda Civic 2021</td>
+                        <td class="px-6 py-4">Brake Inspection</td>
+                        <td class="px-6 py-4">
+                            <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300">
+                                Scheduled
+                            </span>
+                        </td>
+                        <td class="px-6 py-4">
+                            <button class="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300">View Details</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Recent Customer Messages -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+            <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">{% trans "Recent Messages" %}</h3>
+            <div class="space-y-4">
+                <div class="flex items-start p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                    <div class="flex-1">
+                        <p class="font-semibold text-gray-900 dark:text-white">Mike Wilson</p>
+                        <p class="text-sm text-gray-600 dark:text-gray-300">Question about service estimate</p>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">10 minutes ago</p>
+                    </div>
+                    <button class="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300">Reply</button>
+                </div>
+                <div class="flex items-start p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                    <div class="flex-1">
+                        <p class="font-semibold text-gray-900 dark:text-white">Emma Davis</p>
+                        <p class="text-sm text-gray-600 dark:text-gray-300">Service completion time inquiry</p>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">25 minutes ago</p>
+                    </div>
+                    <button class="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300">Reply</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+            <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">{% trans "Pending Estimates" %}</h3>
+            <div class="space-y-4">
+                <div class="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                    <div>
+                        <p class="font-semibold text-gray-900 dark:text-white">BMW X5 - Engine Diagnostic</p>
+                        <p class="text-sm text-gray-600 dark:text-gray-300">Customer: Robert Brown</p>
+                    </div>
+                    <button class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Review</button>
+                </div>
+                <div class="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                    <div>
+                        <p class="font-semibold text-gray-900 dark:text-white">Audi A4 - Transmission Service</p>
+                        <p class="text-sm text-gray-600 dark:text-gray-300">Customer: Lisa Chen</p>
+                    </div>
+                    <button class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Review</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

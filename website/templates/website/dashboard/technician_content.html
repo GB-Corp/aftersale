@@ -1,0 +1,136 @@
+{% load i18n %}
+
+<!-- Current Job -->
+<div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow mb-4">
+    <div class="flex justify-between items-start mb-4">
+        <h3 class="text-xl font-semibold text-gray-900 dark:text-white">{% trans "Current Job" %}</h3>
+        <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">
+            In Progress
+        </span>
+    </div>
+    <div class="space-y-4">
+        <div class="grid grid-cols-2 gap-4">
+            <div>
+                <p class="text-sm text-gray-500 dark:text-gray-400">{% trans "Vehicle" %}</p>
+                <p class="text-lg font-medium text-gray-900 dark:text-white">Toyota Camry 2020</p>
+            </div>
+            <div>
+                <p class="text-sm text-gray-500 dark:text-gray-400">{% trans "Service Type" %}</p>
+                <p class="text-lg font-medium text-gray-900 dark:text-white">Engine Diagnostic</p>
+            </div>
+            <div>
+                <p class="text-sm text-gray-500 dark:text-gray-400">{% trans "Time Started" %}</p>
+                <p class="text-lg font-medium text-gray-900 dark:text-white">09:30 AM</p>
+            </div>
+            <div>
+                <p class="text-sm text-gray-500 dark:text-gray-400">{% trans "Estimated Completion" %}</p>
+                <p class="text-lg font-medium text-gray-900 dark:text-white">11:30 AM</p>
+            </div>
+        </div>
+        <div class="mt-4">
+            <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">{% trans "Progress" %}</p>
+            <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                <div class="bg-blue-600 h-2.5 rounded-full" style="width: 65%"></div>
+            </div>
+        </div>
+        <div class="flex space-x-4 mt-4">
+            <button class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">{% trans "Update Status" %}</button>
+            <button class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">{% trans "Complete Job" %}</button>
+        </div>
+    </div>
+</div>
+
+<!-- Task Checklist -->
+<div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow mb-4">
+    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">{% trans "Task Checklist" %}</h3>
+    <div class="space-y-3">
+        <div class="flex items-center">
+            <input type="checkbox" checked class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300">
+            <label class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">{% trans "Initial inspection completed" %}</label>
+        </div>
+        <div class="flex items-center">
+            <input type="checkbox" checked class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300">
+            <label class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">{% trans "Diagnostic scan performed" %}</label>
+        </div>
+        <div class="flex items-center">
+            <input type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300">
+            <label class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">{% trans "Replace faulty components" %}</label>
+        </div>
+        <div class="flex items-center">
+            <input type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300">
+            <label class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">{% trans "Test after repair" %}</label>
+        </div>
+        <div class="flex items-center">
+            <input type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300">
+            <label class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">{% trans "Quality check completed" %}</label>
+        </div>
+    </div>
+</div>
+
+<!-- Upcoming Jobs -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+        <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">{% trans "Upcoming Jobs" %}</h3>
+        <div class="space-y-4">
+            <div class="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="font-semibold text-gray-900 dark:text-white">Honda Civic 2021</p>
+                        <p class="text-sm text-gray-600 dark:text-gray-300">Brake Inspection</p>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">Scheduled: 1:30 PM</p>
+                    </div>
+                    <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300">
+                        Next
+                    </span>
+                </div>
+            </div>
+            <div class="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="font-semibold text-gray-900 dark:text-white">Ford F-150 2019</p>
+                        <p class="text-sm text-gray-600 dark:text-gray-300">Oil Change</p>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">Scheduled: 3:00 PM</p>
+                    </div>
+                    <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">
+                        Pending
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Required Tools -->
+    <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+        <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">{% trans "Required Tools" %}</h3>
+        <div class="space-y-4">
+            <div class="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                <div class="flex items-center">
+                    <svg class="w-6 h-6 text-gray-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"/>
+                    </svg>
+                    <div>
+                        <p class="font-semibold text-gray-900 dark:text-white">{% trans "Diagnostic Scanner" %}</p>
+                        <p class="text-sm text-gray-600 dark:text-gray-300">{% trans "Bay 3" %}</p>
+                    </div>
+                </div>
+                <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">
+                    Available
+                </span>
+            </div>
+            <div class="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                <div class="flex items-center">
+                    <svg class="w-6 h-6 text-gray-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                    </svg>
+                    <div>
+                        <p class="font-semibold text-gray-900 dark:text-white">{% trans "Socket Set" %}</p>
+                        <p class="text-sm text-gray-600 dark:text-gray-300">{% trans "Tool Room" %}</p>
+                    </div>
+                </div>
+                <span class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">
+                    In Use
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
