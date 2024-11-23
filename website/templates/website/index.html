@@ -424,55 +424,161 @@
         });
     });
     
-    // Modal functionality
-    document.addEventListener('DOMContentLoaded', function() {
-        const registerBtn = document.querySelector('[data-register-workshop]');
-        
-        registerBtn.addEventListener('click', function() {
-            const modal = document.getElementById('workshop-modal');
+    // Modal handling
+    function openModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (modal) {
             modal.classList.remove('hidden');
+            // Store current scroll position and prevent body scroll
+            document.body.style.top = `-${window.scrollY}px`;
+            document.body.style.position = 'fixed';
+            document.body.style.width = '100%';
+        }
+    }
+
+    function closeModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+            modal.classList.add('hidden');
+            // Restore body scroll position
+            const scrollY = document.body.style.top;
+            document.body.style.position = '';
+            document.body.style.top = '';
+            document.body.style.width = '';
+            window.scrollTo(0, parseInt(scrollY || '0') * -1);
+        }
+    }
+
+    // Close modal when clicking outside
+    document.addEventListener('click', function(event) {
+        if (event.target.classList.contains('modal-overlay')) {
+            const modal = event.target.closest('.modal');
+            if (modal) {
+                closeModal(modal.id);
+            }
+        }
+    });
+    
+    // Workshop Registration Modal Functionality
+    const registerBtn = document.querySelector('[data-register-workshop]');
+    const workshopModal = document.getElementById('workshop-modal');
+    const modalOverlay = workshopModal ? workshopModal.querySelector('.fixed.inset-0.bg-gray-900') : null;
+    const closeButtons = workshopModal ? workshopModal.querySelectorAll('.modal-close') : [];
+    
+    function openModal() {
+        if (workshopModal) {
+            workshopModal.classList.remove('hidden');
             document.body.style.overflow = 'hidden';
+            
+            // Reset form if it exists
+            const form = workshopModal.querySelector('#workshop-form');
+            if (form) {
+                form.reset();
+            }
+            
+            // Reset steps if they exist
+            const steps = workshopModal.querySelectorAll('.form-step');
+            if (steps.length > 0) {
+                steps.forEach((step, index) => {
+                    if (index === 0) {
+                        step.classList.remove('hidden');
+                        step.classList.add('active');
+                    } else {
+                        step.classList.add('hidden');
+                        step.classList.remove('active');
+                    }
+                });
+            }
+            
+            // Reset step indicators
+            const stepIndicators = workshopModal.querySelectorAll('.step-indicator .step');
+            if (stepIndicators.length > 0) {
+                stepIndicators.forEach((indicator, index) => {
+                    if (index === 0) {
+                        indicator.classList.add('active');
+                    } else {
+                        indicator.classList.remove('active');
+                    }
+                });
+            }
+        }
+    }
+    
+    function closeModal() {
+        if (workshopModal) {
+            workshopModal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+    }
+    
+    // Open modal when clicking the register button
+    if (registerBtn) {
+        registerBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            openModal();
         });
-        
-        // Close modal when clicking outside
-        document.addEventListener('click', function(e) {
-            const modal = document.getElementById('workshop-modal');
-            if (e.target === modal) {
-                modal.classList.add('hidden');
-                document.body.style.overflow = 'auto';
+    }
+    
+    // Close modal when clicking close buttons
+    closeButtons.forEach(button => {
+        button.addEventListener('click', closeModal);
+    });
+    
+    // Close modal when clicking outside
+    if (modalOverlay) {
+        modalOverlay.addEventListener('click', function(e) {
+            if (e.target === modalOverlay) {
+                closeModal();
             }
         });
-        
-        // Form navigation
-        const form = document.getElementById('workshop-form');
-        const nextBtn = document.querySelector('.btn-next');
-        const prevBtn = document.querySelector('.btn-prev');
-        const steps = document.querySelectorAll('.step');
-        let currentStep = 0;
-        
+    }
+    
+    // Close modal on Escape key press
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && workshopModal && !workshopModal.classList.contains('hidden')) {
+            closeModal();
+        }
+    });
+    
+    // Form navigation
+    const form = workshopModal ? workshopModal.querySelector('#workshop-form') : null;
+    const nextBtn = workshopModal ? workshopModal.querySelector('.btn-next') : null;
+    const prevBtn = workshopModal ? workshopModal.querySelector('.btn-prev') : null;
+    const steps = workshopModal ? workshopModal.querySelectorAll('.form-step') : [];
+    let currentStep = 0;
+    
+    if (nextBtn) {
         nextBtn.addEventListener('click', function() {
             if (currentStep < steps.length - 1) {
                 steps[currentStep].classList.remove('active');
+                steps[currentStep].classList.add('hidden');
                 steps[currentStep + 1].classList.add('active');
+                steps[currentStep + 1].classList.remove('hidden');
                 currentStep++;
                 updateNavButtons();
             }
         });
-        
+    }
+    
+    if (prevBtn) {
         prevBtn.addEventListener('click', function() {
             if (currentStep > 0) {
                 steps[currentStep].classList.remove('active');
+                steps[currentStep].classList.add('hidden');
                 steps[currentStep - 1].classList.add('active');
+                steps[currentStep - 1].classList.remove('hidden');
                 currentStep--;
                 updateNavButtons();
             }
         });
-        
-        function updateNavButtons() {
+    }
+    
+    function updateNavButtons() {
+        if (prevBtn && nextBtn) {
             prevBtn.classList.toggle('hidden', currentStep === 0);
             nextBtn.textContent = currentStep === steps.length - 1 ? '{% trans "Submit" %}' : '{% trans "Next" %}';
         }
-    });
+    }
 </script>
 {% endblock %}
 

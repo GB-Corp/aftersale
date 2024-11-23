@@ -8,7 +8,7 @@
         <div class="inline-block w-full max-w-4xl p-6 my-8 text-left align-middle transition-all transform bg-white dark:bg-gray-800 shadow-xl rounded-2xl">
             <div class="flex justify-between items-center mb-4">
                 <h3 class="text-2xl font-bold text-gray-900 dark:text-white">{% trans "Register Your Workshop" %}</h3>
-                <button type="button" class="modal-close text-gray-400 hover:text-gray-500">
+                <button type="button" class="modal-close text-gray-400 hover:text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700 p-2 rounded-full transition-colors duration-200">
                     <span class="sr-only">Close</span>
                     <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -16,79 +16,163 @@
                 </button>
             </div>
             <div class="modal-content">
-                <!-- Workshop Registration Form Content -->
-                <div class="step-indicator">
-                    <div class="step active">
-                        <div class="step-number">1</div>
-                        <div class="step-title">{% trans "Basic Info" %}</div>
+                <!-- Enhanced Step Indicator -->
+                <div class="step-indicator mb-8 flex items-center justify-between">
+                    <div class="step active flex-1">
+                        <div class="relative">
+                            <div class="step-number w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center font-semibold text-lg transition-all duration-300">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                                </svg>
+                            </div>
+                            <div class="step-title mt-2 text-sm font-medium text-gray-900 dark:text-white flex items-center justify-center">
+                                <span class="sr-only">{% trans "Basic Info" %}</span>
+                            </div>
+                            <div class="absolute top-5 left-10 w-full h-0.5 bg-gray-200 dark:bg-gray-700 -z-10"></div>
+                        </div>
                     </div>
-                    <div class="step-connector"></div>
-                    <div class="step">
-                        <div class="step-number">2</div>
-                        <div class="step-title">{% trans "Workshop Details" %}</div>
+                    <div class="step flex-1">
+                        <div class="relative">
+                            <div class="step-number w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400 flex items-center justify-center font-semibold text-lg transition-all duration-300">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                                </svg>
+                            </div>
+                            <div class="step-title mt-2 text-sm font-medium text-gray-500 dark:text-gray-400 flex items-center justify-center">
+                                <span class="sr-only">{% trans "Workshop Details" %}</span>
+                            </div>
+                            <div class="absolute top-5 left-10 w-full h-0.5 bg-gray-200 dark:bg-gray-700 -z-10"></div>
+                        </div>
                     </div>
-                    <div class="step-connector"></div>
-                    <div class="step">
-                        <div class="step-number">3</div>
-                        <div class="step-title">{% trans "Documents" %}</div>
+                    <div class="step flex-1">
+                        <div class="relative">
+                            <div class="step-number w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400 flex items-center justify-center font-semibold text-lg transition-all duration-300">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                </svg>
+                            </div>
+                            <div class="step-title mt-2 text-sm font-medium text-gray-500 dark:text-gray-400 flex items-center justify-center">
+                                <span class="sr-only">{% trans "Documents" %}</span>
+                            </div>
+                            <div class="absolute top-5 left-10 w-full h-0.5 bg-gray-200 dark:bg-gray-700 -z-10"></div>
+                        </div>
                     </div>
-                    <div class="step-connector"></div>
-                    <div class="step">
-                        <div class="step-number">4</div>
-                        <div class="step-title">{% trans "Review" %}</div>
+                    <div class="step flex-1">
+                        <div class="relative">
+                            <div class="step-number w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400 flex items-center justify-center font-semibold text-lg transition-all duration-300">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
+                                </svg>
+                            </div>
+                            <div class="step-title mt-2 text-sm font-medium text-gray-500 dark:text-gray-400 flex items-center justify-center">
+                                <span class="sr-only">{% trans "Review" %}</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
                 <form id="workshop-form" class="space-y-6" method="post" action="{% url 'website:register_workshop' %}" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="form-step active">
                         <div class="space-y-4">
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">{% trans "Workshop Name" %}</label>
-                                <input type="text" name="workshop_name" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">{% trans "Workshop Name" %}</label>
+                                    <input type="text" name="workshop_name" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">{% trans "Owner Name" %}</label>
+                                    <input type="text" name="owner_name" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                                </div>
                             </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">{% trans "Owner Name" %}</label>
-                                <input type="text" name="owner_name" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">{% trans "Email" %}</label>
-                                <input type="email" name="email" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">{% trans "Phone Number" %}</label>
-                                <input type="tel" name="phone" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">{% trans "Email" %}</label>
+                                    <input type="email" name="email" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">{% trans "Phone Number" %}</label>
+                                    <input type="tel" name="phone" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="form-step hidden">
-                        <div class="space-y-4">
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">{% trans "Workshop Address" %}</label>
-                                <textarea name="address" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600" rows="3"></textarea>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">{% trans "Workshop Type" %}</label>
-                                <select name="workshop_type" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600">
-                                    <option value="">{% trans "Select Type" %}</option>
-                                    <option value="general">{% trans "General Service" %}</option>
-                                    <option value="specialist">{% trans "Specialist" %}</option>
-                                    <option value="body_shop">{% trans "Body Shop" %}</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">{% trans "Services Offered" %}</label>
-                                <div class="mt-2 space-y-2">
-                                    <div class="flex items-center">
-                                        <input type="checkbox" name="services[]" value="oil_change" class="rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-500 focus:ring-blue-500">
-                                        <label class="ml-2 text-sm text-gray-700 dark:text-gray-300">{% trans "Oil Change" %}</label>
+                        <div class="space-y-6">
+                            <div class="bg-blue-50 dark:bg-blue-900/30 p-4 rounded-lg">
+                                <h4 class="text-lg font-medium text-blue-900 dark:text-blue-100 mb-4">{% trans "Workshop Specifications" %}</h4>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">{% trans "Workshop Size (sqm)" %}</label>
+                                        <input type="number" name="workshop_size" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                                     </div>
-                                    <div class="flex items-center">
-                                        <input type="checkbox" name="services[]" value="tire_service" class="rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-500 focus:ring-blue-500">
-                                        <label class="ml-2 text-sm text-gray-700 dark:text-gray-300">{% trans "Tire Service" %}</label>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">{% trans "Number of Service Bays" %}</label>
+                                        <input type="number" name="service_bays" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                                     </div>
-                                    <div class="flex items-center">
-                                        <input type="checkbox" name="services[]" value="brake_service" class="rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-500 focus:ring-blue-500">
-                                        <label class="ml-2 text-sm text-gray-700 dark:text-gray-300">{% trans "Brake Service" %}</label>
+                                </div>
+                            </div>
+
+                            <div class="bg-green-50 dark:bg-green-900/30 p-4 rounded-lg">
+                                <h4 class="text-lg font-medium text-green-900 dark:text-green-100 mb-4">{% trans "Staff Information" %}</h4>
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">{% trans "Number of Technicians" %}</label>
+                                        <input type="number" name="num_technicians" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">{% trans "Number of Supervisors" %}</label>
+                                        <input type="number" name="num_supervisors" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">{% trans "Total Staff" %}</label>
+                                        <input type="number" name="total_staff" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bg-purple-50 dark:bg-purple-900/30 p-4 rounded-lg">
+                                <h4 class="text-lg font-medium text-purple-900 dark:text-purple-100 mb-4">{% trans "Facilities & Equipment" %}</h4>
+                                <div class="space-y-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{% trans "Available Car Models Service" %}</label>
+                                        <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+                                            <label class="flex items-center space-x-2">
+                                                <input type="checkbox" name="models[]" value="sedan" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                                <span class="text-sm text-gray-700 dark:text-gray-300">{% trans "Sedan" %}</span>
+                                            </label>
+                                            <label class="flex items-center space-x-2">
+                                                <input type="checkbox" name="models[]" value="suv" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                                <span class="text-sm text-gray-700 dark:text-gray-300">{% trans "SUV" %}</span>
+                                            </label>
+                                            <label class="flex items-center space-x-2">
+                                                <input type="checkbox" name="models[]" value="truck" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                                <span class="text-sm text-gray-700 dark:text-gray-300">{% trans "Truck" %}</span>
+                                            </label>
+                                            <label class="flex items-center space-x-2">
+                                                <input type="checkbox" name="models[]" value="van" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                                <span class="text-sm text-gray-700 dark:text-gray-300">{% trans "Van" %}</span>
+                                            </label>
+                                            <label class="flex items-center space-x-2">
+                                                <input type="checkbox" name="models[]" value="luxury" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                                <span class="text-sm text-gray-700 dark:text-gray-300">{% trans "Luxury" %}</span>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">{% trans "Spare Parts Warehouse?" %}</label>
+                                            <select name="has_warehouse" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                                                <option value="">{% trans "Select option" %}</option>
+                                                <option value="yes">{% trans "Yes" %}</option>
+                                                <option value="no">{% trans "No" %}</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">{% trans "Warehouse Size (sqm)" %}</label>
+                                            <input type="number" name="warehouse_size" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -113,19 +197,32 @@
                                 <!-- Will be populated by JavaScript -->
                             </div>
                             <div class="flex items-start">
-                                <input type="checkbox" name="terms_accepted" required class="mt-1 rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                <input type="checkbox" name="terms_accepted" required class="mt-1 rounded border-gray-300 text-blue-600 focus:ring-blue-500">
                                 <label class="ml-2 text-sm text-gray-700 dark:text-gray-300">
                                     {% trans "I agree to the" %} <a href="#" class="text-blue-600 hover:text-blue-700">{% trans "Terms and Conditions" %}</a>
                                 </label>
                             </div>
                         </div>
                     </div>
-                    <div class="mt-6 flex justify-between">
-                        <button type="button" class="btn-prev hidden px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                    <div class="mt-6 flex justify-between space-x-4">
+                        <button type="button" class="btn-prev hidden px-6 py-2.5 text-sm font-medium text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-all duration-300 flex items-center">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                            </svg>
                             {% trans "Previous" %}
                         </button>
-                        <button type="button" class="btn-next px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                        <div class="flex-1"></div>
+                        <button type="button" class="btn-next px-6 py-2.5 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-300 flex items-center">
                             {% trans "Next" %}
+                            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </button>
+                        <button type="submit" class="submit-btn hidden px-6 py-2.5 text-sm font-medium text-white bg-green-600 rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-all duration-300 flex items-center">
+                            {% trans "Submit Registration" %}
+                            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
                         </button>
                     </div>
                 </form>
@@ -134,111 +231,233 @@
     </div>
 </div>
 
+<style>
+    /* Step Indicator Styles */
+    .step.active .step-number {
+        @apply bg-blue-600 text-white;
+    }
+    
+    .step.active .step-title {
+        @apply text-blue-600 dark:text-blue-400;
+    }
+    
+    .step.completed .step-number {
+        @apply bg-green-600 text-white;
+    }
+    
+    .step.completed .step-title {
+        @apply text-green-600 dark:text-green-400;
+    }
+    
+    .step.completed .step-number::after {
+        content: '✓';
+    }
+    
+    /* Form Step Transitions */
+    .form-step {
+        transition: all 0.5s ease;
+        position: absolute;
+        width: 100%;
+        opacity: 0;
+        transform: translateX(50px);
+        pointer-events: none;
+    }
+
+    .form-step.active {
+        opacity: 1;
+        transform: translateX(0);
+        position: relative;
+        pointer-events: all;
+    }
+
+    .form-step.previous {
+        transform: translateX(-50px);
+    }
+
+    .form-step.next {
+        transform: translateX(50px);
+    }
+
+    .step.active .step-number svg {
+        animation: iconPop 0.3s ease forwards;
+    }
+
+    @keyframes iconPop {
+        0% { transform: scale(0.8); }
+        50% { transform: scale(1.2); }
+        100% { transform: scale(1); }
+    }
+    
+    /* File Input Styling */
+    input[type="file"] {
+        @apply block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 
+               file:rounded-full file:border-0 file:text-sm file:font-semibold 
+               file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 
+               transition-all duration-300 cursor-pointer;
+    }
+    
+    /* Form Validation Styles */
+    input:invalid, select:invalid, textarea:invalid {
+        @apply border-red-300 focus:border-red-500 focus:ring-red-500;
+    }
+    
+    .error-message {
+        @apply text-sm text-red-600 mt-1;
+    }
+    
+    /* Loading State */
+    .loading {
+        @apply opacity-50 cursor-not-allowed;
+    }
+    
+    /* Success Animation */
+    @keyframes success-animation {
+        0% { transform: scale(0.8); opacity: 0; }
+        100% { transform: scale(1); opacity: 1; }
+    }
+    
+    .success-message {
+        animation: success-animation 0.3s ease-out forwards;
+    }
+</style>
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const modal = document.getElementById('workshop-modal');
         const form = document.getElementById('workshop-form');
-        const nextBtn = document.querySelector('.btn-next');
-        const prevBtn = document.querySelector('.btn-prev');
-        const steps = document.querySelectorAll('.form-step');
+        const steps = form.querySelectorAll('.form-step');
         const stepIndicators = document.querySelectorAll('.step');
         let currentStep = 0;
-
+        
         function updateStepDisplay() {
             steps.forEach((step, index) => {
-                step.classList.toggle('hidden', index !== currentStep);
-                stepIndicators[index].classList.toggle('active', index <= currentStep);
+                if (index === currentStep) {
+                    step.classList.remove('hidden');
+                    step.classList.add('active');
+                } else {
+                    step.classList.add('hidden');
+                    step.classList.remove('active');
+                }
             });
             
-            prevBtn.classList.toggle('hidden', currentStep === 0);
-            nextBtn.textContent = currentStep === steps.length - 1 ? '{% trans "Submit" %}' : '{% trans "Next" %}';
-        }
-
-        nextBtn.addEventListener('click', function() {
-            if (currentStep === steps.length - 1) {
-                // Submit form
-                if (form.checkValidity()) {
-                    form.submit();
+            stepIndicators.forEach((indicator, index) => {
+                if (index === currentStep) {
+                    indicator.classList.add('active');
+                    indicator.classList.remove('completed');
+                } else if (index < currentStep) {
+                    indicator.classList.add('completed');
+                    indicator.classList.remove('active');
                 } else {
-                    // Trigger HTML5 validation
-                    form.reportValidity();
-                }
-                return;
-            }
-
-            // Validate current step before proceeding
-            const currentInputs = steps[currentStep].querySelectorAll('input[required], select[required], textarea[required]');
-            let isValid = true;
-            currentInputs.forEach(input => {
-                if (!input.checkValidity()) {
-                    isValid = false;
-                    input.reportValidity();
+                    indicator.classList.remove('active', 'completed');
                 }
             });
-
-            if (isValid && currentStep < steps.length - 1) {
+            
+            // Update navigation buttons
+            form.querySelector('.prev-step').classList.toggle('hidden', currentStep === 0);
+            form.querySelector('.next-step').classList.toggle('hidden', currentStep === steps.length - 1);
+            form.querySelector('.submit-form').classList.toggle('hidden', currentStep !== steps.length - 1);
+        }
+        
+        function validateStep(step) {
+            const inputs = step.querySelectorAll('input[required], select[required], textarea[required]');
+            let isValid = true;
+            
+            inputs.forEach(input => {
+                if (!input.value.trim()) {
+                    isValid = false;
+                    input.classList.add('border-red-300', 'focus:border-red-500', 'focus:ring-red-500');
+                    
+                    // Add error message if not exists
+                    let errorMessage = input.nextElementSibling;
+                    if (!errorMessage || !errorMessage.classList.contains('error-message')) {
+                        errorMessage = document.createElement('p');
+                        errorMessage.className = 'error-message';
+                        errorMessage.textContent = '{% trans "This field is required" %}';
+                        input.parentNode.insertBefore(errorMessage, input.nextSibling);
+                    }
+                } else {
+                    input.classList.remove('border-red-300', 'focus:border-red-500', 'focus:ring-red-500');
+                    
+                    // Remove error message if exists
+                    const errorMessage = input.nextElementSibling;
+                    if (errorMessage && errorMessage.classList.contains('error-message')) {
+                        errorMessage.remove();
+                    }
+                }
+            });
+            
+            return isValid;
+        }
+        
+        form.querySelector('.next-step').addEventListener('click', function() {
+            if (validateStep(steps[currentStep]) && currentStep < steps.length - 1) {
                 currentStep++;
                 updateStepDisplay();
-                if (currentStep === steps.length - 1) {
-                    populateReview();
-                }
             }
         });
-
-        prevBtn.addEventListener('click', function() {
+        
+        form.querySelector('.prev-step').addEventListener('click', function() {
             if (currentStep > 0) {
                 currentStep--;
                 updateStepDisplay();
             }
         });
-
-        function populateReview() {
-            const reviewContent = document.getElementById('review-content');
-            const formData = new FormData(form);
-            let reviewHTML = '<dl class="space-y-4">';
-
-            for (let [key, value] of formData.entries()) {
-                if (key !== 'csrf_token' && value) {
-                    const label = form.querySelector(`label[for="${key}"]`)?.textContent || key;
-                    reviewHTML += `
-                        <div>
-                            <dt class="font-medium">${label}</dt>
-                            <dd class="mt-1">${value}</dd>
-                        </div>
-                    `;
-                }
-            }
-
-            reviewHTML += '</dl>';
-            reviewContent.innerHTML = reviewHTML;
-        }
-
-        // File input preview (if needed)
-        const fileInputs = document.querySelectorAll('input[type="file"]');
-        fileInputs.forEach(input => {
-            input.addEventListener('change', function(e) {
-                const preview = document.createElement('div');
-                preview.className = 'mt-2 grid grid-cols-3 gap-4';
+        
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
                 
-                [...e.target.files].forEach(file => {
-                    if (file.type.startsWith('image/')) {
-                        const reader = new FileReader();
-                        reader.onload = function(e) {
-                            const img = document.createElement('img');
-                            img.src = e.target.result;
-                            img.className = 'h-24 w-24 object-cover rounded-lg';
-                            preview.appendChild(img);
-                        }
-                        reader.readAsDataURL(file);
-                    }
-                });
-
-                const existingPreview = input.parentElement.querySelector('.preview');
-                if (existingPreview) {
-                    existingPreview.remove();
+                if (!validateStep(steps[currentStep])) {
+                    return;
                 }
-                input.parentElement.appendChild(preview);
+                
+                form.querySelector('.submit-form').disabled = true;
+                form.querySelector('.submit-form').innerHTML = `
+                    <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    {% trans "Submitting..." %}
+                `;
+                
+                const formData = new FormData(form);
+                
+                fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        showNotification('{% trans "Workshop registration submitted successfully!" %}', 'success');
+                        modal.classList.add('hidden');
+                        form.reset();
+                        currentStep = 0;
+                        updateStepDisplay();
+                    } else {
+                        throw new Error(data.message || '{% trans "Registration failed" %}');
+                    }
+                })
+                .catch(error => {
+                    showNotification(error.message, 'error');
+                })
+                .finally(() => {
+                    form.querySelector('.submit-form').disabled = false;
+                    form.querySelector('.submit-form').innerHTML = `
+                        {% trans "Submit Registration" %}
+                        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                    `;
+                });
             });
-        });
+        }
+        
+        // Initialize
+        updateStepDisplay();
     });
 </script>

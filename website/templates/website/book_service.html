@@ -1,0 +1,226 @@
+{% load i18n %}
+
+<!-- Book Service Modal -->
+<div id="book-service-modal" class="fixed inset-0 z-50 hidden overflow-y-auto">
+    <div class="min-h-screen px-4 text-center">
+        <div class="fixed inset-0 bg-gray-900 bg-opacity-50 transition-opacity"></div>
+        <span class="inline-block h-screen align-middle">&#8203;</span>
+        <div class="inline-block w-full max-w-4xl p-6 my-8 text-left align-middle transition-all transform bg-white dark:bg-gray-800 shadow-xl rounded-2xl">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white">{% trans "Book a Service" %}</h3>
+                <button type="button" class="modal-close text-gray-400 hover:text-gray-500">
+                    <span class="sr-only">Close</span>
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-content">
+                <!-- Service Booking Form -->
+                <div class="step-indicator mb-8">
+                    <div class="step active">
+                        <div class="step-number">1</div>
+                        <div class="step-title">{% trans "Vehicle Info" %}</div>
+                    </div>
+                    <div class="step-connector"></div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-title">{% trans "Service Details" %}</div>
+                    </div>
+                    <div class="step-connector"></div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-title">{% trans "Schedule" %}</div>
+                    </div>
+                </div>
+
+                <form id="service-booking-form" class="space-y-6" method="post" action="{% url 'website:book_service' %}">
+                    {% csrf_token %}
+                    
+                    <!-- Step 1: Vehicle Information -->
+                    <div class="form-step active">
+                        <div class="space-y-4">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">{% trans "Vehicle Make" %}</label>
+                                    <input type="text" name="vehicle_make" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">{% trans "Vehicle Model" %}</label>
+                                    <input type="text" name="vehicle_model" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600">
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">{% trans "Year" %}</label>
+                                    <input type="number" name="vehicle_year" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">{% trans "License Plate" %}</label>
+                                    <input type="text" name="license_plate" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">{% trans "Current Mileage" %}</label>
+                                <input type="number" name="mileage" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Service Details -->
+                    <div class="form-step hidden">
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">{% trans "Service Type" %}</label>
+                                <select name="service_type" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600">
+                                    <option value="">{% trans "Select a service type" %}</option>
+                                    <option value="maintenance">{% trans "Regular Maintenance" %}</option>
+                                    <option value="repair">{% trans "Repair" %}</option>
+                                    <option value="diagnostic">{% trans "Diagnostic" %}</option>
+                                    <option value="inspection">{% trans "Inspection" %}</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">{% trans "Service Description" %}</label>
+                                <textarea name="service_description" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600" placeholder="{% trans 'Describe the service you need...' %}"></textarea>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">{% trans "Additional Services" %}</label>
+                                <div class="mt-2 space-y-2">
+                                    <div class="flex items-center">
+                                        <input type="checkbox" name="additional_services[]" value="oil_change" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                                        <label class="ml-2 text-sm text-gray-700 dark:text-gray-300">{% trans "Oil Change" %}</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input type="checkbox" name="additional_services[]" value="tire_rotation" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                                        <label class="ml-2 text-sm text-gray-700 dark:text-gray-300">{% trans "Tire Rotation" %}</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input type="checkbox" name="additional_services[]" value="brake_inspection" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                                        <label class="ml-2 text-sm text-gray-700 dark:text-gray-300">{% trans "Brake Inspection" %}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Schedule -->
+                    <div class="form-step hidden">
+                        <div class="space-y-4">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">{% trans "Preferred Date" %}</label>
+                                    <input type="date" name="preferred_date" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">{% trans "Preferred Time" %}</label>
+                                    <select name="preferred_time" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600">
+                                        <option value="">{% trans "Select a time" %}</option>
+                                        <option value="morning">{% trans "Morning (8:00 AM - 12:00 PM)" %}</option>
+                                        <option value="afternoon">{% trans "Afternoon (12:00 PM - 4:00 PM)" %}</option>
+                                        <option value="evening">{% trans "Evening (4:00 PM - 8:00 PM)" %}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">{% trans "Special Instructions" %}</label>
+                                <textarea name="special_instructions" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600" placeholder="{% trans 'Any special instructions or requirements...' %}"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Navigation Buttons -->
+                    <div class="flex justify-between mt-8">
+                        <button type="button" class="prev-step hidden px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600">
+                            {% trans "Previous" %}
+                        </button>
+                        <button type="button" class="next-step px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                            {% trans "Next" %}
+                        </button>
+                        <button type="submit" class="submit-btn hidden px-4 py-2 text-sm font-medium text-white bg-green-600 hover:bg-green-700 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                            {% trans "Book Service" %}
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const modal = document.getElementById('book-service-modal');
+        const form = document.getElementById('service-booking-form');
+        const steps = document.querySelectorAll('.form-step');
+        const stepIndicators = document.querySelectorAll('.step-indicator .step');
+        const nextBtn = document.querySelector('.next-step');
+        const prevBtn = document.querySelector('.prev-step');
+        const submitBtn = document.querySelector('.submit-btn');
+        let currentStep = 0;
+
+        function updateStepDisplay() {
+            steps.forEach((step, index) => {
+                step.classList.toggle('hidden', index !== currentStep);
+                stepIndicators[index].classList.toggle('active', index <= currentStep);
+            });
+
+            prevBtn.classList.toggle('hidden', currentStep === 0);
+            nextBtn.classList.toggle('hidden', currentStep === steps.length - 1);
+            submitBtn.classList.toggle('hidden', currentStep !== steps.length - 1);
+        }
+
+        nextBtn.addEventListener('click', function() {
+            if (currentStep < steps.length - 1) {
+                currentStep++;
+                updateStepDisplay();
+            }
+        });
+
+        prevBtn.addEventListener('click', function() {
+            if (currentStep > 0) {
+                currentStep--;
+                updateStepDisplay();
+            }
+        });
+
+        // Close modal functionality
+        const closeButtons = modal.querySelectorAll('.modal-close');
+        closeButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                modal.classList.add('hidden');
+            });
+        });
+
+        // Form submission
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Add your form submission logic here
+            const formData = new FormData(form);
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Show success message and close modal
+                    alert('Service booked successfully!');
+                    modal.classList.add('hidden');
+                    form.reset();
+                    currentStep = 0;
+                    updateStepDisplay();
+                } else {
+                    // Show error message
+                    alert('Error booking service. Please try again.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error booking service. Please try again.');
+            });
+        });
+    });
+</script>
