@@ -2,15 +2,12 @@
 
 <!-- Book Service Modal -->
 <div id="book-service-modal" class="fixed inset-0 z-50 hidden overflow-y-auto">
-    <div class="min-h-screen px-4 text-center">
+    <div class="min-h-screen px-4 flex items-center justify-center">
         <!-- Overlay -->
         <div class="fixed inset-0 bg-gray-900 bg-opacity-50 transition-opacity"></div>
         
-        <!-- Modal positioning -->
-        <span class="inline-block h-screen align-middle">&#8203;</span>
-        
         <!-- Modal content -->
-        <div class="inline-block w-full max-w-2xl p-6 my-8 text-left align-middle transition-all transform bg-white dark:bg-gray-800 shadow-xl rounded-2xl">
+        <div class="relative w-full max-w-2xl p-6 bg-white dark:bg-gray-800 shadow-xl rounded-2xl">
             <!-- Header -->
             <div class="flex justify-between items-center mb-6">
                 <h3 class="text-2xl font-bold text-gray-900 dark:text-white">{% trans "Book a Service" %}</h3>
@@ -22,22 +19,81 @@
                 </button>
             </div>
 
-            <!-- Form -->
-            <form id="book-service-form" class="space-y-6">
-                <!-- Service Selection -->
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                        {% trans "Select Service" %}
-                    </label>
-                    <select class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
-                        <option value="oil-change">{% trans "Oil Change" %}</option>
-                        <option value="engine-diagnostics">{% trans "Engine Diagnostics" %}</option>
-                        <option value="tire-service">{% trans "Tire Service" %}</option>
-                        <option value="brake-service">{% trans "Brake Service" %}</option>
-                    </select>
+            <!-- Step Progress -->
+            <div class="relative mb-6">
+                <div class="flex items-center justify-between">
+                    <div class="step-indicator active">
+                        <div class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center">1</div>
+                        <span class="text-sm mt-1">{% trans "Verify" %}</span>
+                    </div>
+                    <div class="step-indicator">
+                        <div class="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400 flex items-center justify-center">2</div>
+                        <span class="text-sm mt-1">{% trans "Vehicle" %}</span>
+                    </div>
+                    <div class="step-indicator">
+                        <div class="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400 flex items-center justify-center">3</div>
+                        <span class="text-sm mt-1">{% trans "Service" %}</span>
+                    </div>
                 </div>
+                <div class="absolute top-4 left-0 w-full h-0.5 bg-gray-200 dark:bg-gray-700 -z-10"></div>
+            </div>
 
-                <!-- Vehicle Information -->
+            <!-- Mobile Verification Step -->
+            <div id="mobile-verification-step" class="step-content active">
+                <form id="mobile-verification-form" class="space-y-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            {% trans "Mobile Number" %}
+                        </label>
+                        <div class="flex">
+                            <input type="tel" id="mobile-number" name="mobile" required
+                                class="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                                placeholder="{% trans 'Enter your mobile number' %}">
+                            <button type="button" id="verify-mobile-btn"
+                                class="ml-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                {% trans "Verify" %}
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- OTP Input (Initially Hidden) -->
+                    <div id="otp-input-container" class="hidden space-y-4">
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                            {% trans "Enter OTP" %}
+                        </label>
+                        <div class="flex justify-between max-w-xs">
+                            <input type="text" maxlength="1" class="w-12 h-12 text-center border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-xl">
+                            <input type="text" maxlength="1" class="w-12 h-12 text-center border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-xl">
+                            <input type="text" maxlength="1" class="w-12 h-12 text-center border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-xl">
+                            <input type="text" maxlength="1" class="w-12 h-12 text-center border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-xl">
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <button type="button" id="resend-otp-btn" class="text-sm text-blue-600 hover:text-blue-700 dark:text-blue-400">
+                                {% trans "Resend OTP" %}
+                            </button>
+                            <span id="otp-timer" class="text-sm text-gray-500">01:59</span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Saved Cars Step (Initially Hidden) -->
+            <div id="saved-cars-step" class="step-content hidden">
+                <div class="space-y-4">
+                    <h4 class="text-lg font-semibold text-gray-900 dark:text-white">{% trans "Select Your Vehicle" %}</h4>
+                    <div id="saved-cars-list" class="space-y-3">
+                        <!-- Saved cars will be populated here -->
+                    </div>
+                    <button type="button" id="add-new-car-btn" 
+                        class="w-full px-4 py-2 text-sm text-blue-600 border border-blue-600 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/30 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        {% trans "Add New Vehicle" %}
+                    </button>
+                </div>
+            </div>
+
+            <!-- Vehicle Form Step (Initially Hidden) -->
+            <div id="vehicle-form-step" class="step-content hidden">
+                <!-- Existing vehicle form content -->
                 <div class="space-y-4">
                     <h4 class="text-lg font-semibold text-gray-900 dark:text-white">{% trans "Vehicle Information" %}</h4>
                     
@@ -75,76 +131,135 @@
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- Preferred Date and Time -->
-                <div class="space-y-4">
-                    <h4 class="text-lg font-semibold text-gray-900 dark:text-white">{% trans "Preferred Schedule" %}</h4>
-                    
-                    <div class="grid grid-cols-2 gap-4">
-                        <!-- Date -->
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                                {% trans "Date" %}
-                            </label>
-                            <input type="date" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white" required>
-                        </div>
-
-                        <!-- Time -->
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                                {% trans "Time" %}
-                            </label>
-                            <input type="time" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white" required>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Additional Notes -->
+            <!-- Service Selection Step (Initially Hidden) -->
+            <div id="service-selection-step" class="step-content hidden">
+                <!-- Existing service selection content -->
                 <div>
                     <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                        {% trans "Additional Notes" %}
+                        {% trans "Select Service" %}
                     </label>
-                    <textarea rows="3" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white resize-none"></textarea>
+                    <select class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
+                        <option value="oil-change">{% trans "Oil Change" %}</option>
+                        <option value="engine-diagnostics">{% trans "Engine Diagnostics" %}</option>
+                        <option value="tire-service">{% trans "Tire Service" %}</option>
+                        <option value="brake-service">{% trans "Brake Service" %}</option>
+                    </select>
                 </div>
-
-                <!-- Submit Button -->
-                <div class="flex justify-end mt-6">
-                    <button type="submit" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                        {% trans "Book Now" %}
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<!-- Success Modal -->
-<div id="booking-success-modal" class="fixed inset-0 z-50 hidden overflow-y-auto">
-    <div class="min-h-screen px-4 text-center">
-        <div class="fixed inset-0 bg-gray-900 bg-opacity-50 transition-opacity"></div>
-        <span class="inline-block h-screen align-middle">&#8203;</span>
-        
-        <div class="inline-block w-full max-w-md p-6 my-8 text-center align-middle transition-all transform bg-white dark:bg-gray-800 shadow-xl rounded-2xl">
-            <!-- Success Icon -->
-            <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100 dark:bg-green-900 mb-4">
-                <svg class="h-6 w-6 text-green-600 dark:text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                </svg>
             </div>
-            
-            <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-2">
-                {% trans "Booking Successful!" %}
-            </h3>
-            
-            <p class="text-sm text-gray-500 dark:text-gray-400 mb-6">
-                {% trans "Your service has been booked successfully. We'll send you a confirmation email with all the details." %}
-            </p>
-            
-            <div class="mt-6">
-                <button type="button" class="modal-close inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                    {% trans "Got it, thanks!" %}
+
+            <!-- Navigation Buttons -->
+            <div class="flex justify-between mt-6">
+                <button type="button" id="prev-step-btn" class="hidden px-6 py-2 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
+                    {% trans "Back" %}
+                </button>
+                <button type="button" id="next-step-btn" class="hidden ml-auto px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    {% trans "Next" %}
                 </button>
             </div>
         </div>
     </div>
 </div>
+
+<!-- Add necessary JavaScript -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const modal = document.getElementById('book-service-modal');
+        const mobileForm = document.getElementById('mobile-verification-form');
+        const otpContainer = document.getElementById('otp-input-container');
+        const verifyBtn = document.getElementById('verify-mobile-btn');
+        const otpInputs = otpContainer.querySelectorAll('input');
+        const resendBtn = document.getElementById('resend-otp-btn');
+        const otpTimer = document.getElementById('otp-timer');
+        
+        let timeLeft = 119; // 1:59 in seconds
+        let timerId = null;
+
+        // Handle mobile verification
+        verifyBtn.addEventListener('click', function() {
+            const mobileNumber = document.getElementById('mobile-number').value;
+            if (mobileNumber) {
+                // Send verification request to backend
+                fetch('/api/send-otp/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': getCookie('csrftoken')
+                    },
+                    body: JSON.stringify({ mobile: mobileNumber })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        otpContainer.classList.remove('hidden');
+                        verifyBtn.disabled = true;
+                        startOtpTimer();
+                    }
+                });
+            }
+        });
+
+        // Handle OTP input
+        otpInputs.forEach((input, index) => {
+            input.addEventListener('input', function() {
+                if (this.value.length === 1) {
+                    if (index < otpInputs.length - 1) {
+                        otpInputs[index + 1].focus();
+                    }
+                }
+            });
+
+            input.addEventListener('keydown', function(e) {
+                if (e.key === 'Backspace' && !this.value && index > 0) {
+                    otpInputs[index - 1].focus();
+                }
+            });
+        });
+
+        // Timer functions
+        function startOtpTimer() {
+            timeLeft = 119;
+            if (timerId) clearInterval(timerId);
+            timerId = setInterval(updateTimer, 1000);
+            resendBtn.disabled = true;
+        }
+
+        function updateTimer() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            otpTimer.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            if (timeLeft === 0) {
+                clearInterval(timerId);
+                resendBtn.disabled = false;
+            } else {
+                timeLeft--;
+            }
+        }
+
+        // Handle resend OTP
+        resendBtn.addEventListener('click', function() {
+            if (!this.disabled) {
+                // Resend OTP logic here
+                startOtpTimer();
+            }
+        });
+
+        // CSRF token helper
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+    });
+</script>

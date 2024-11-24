@@ -12,9 +12,9 @@
 
     {% endblock %}
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lexend">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="icon" href="{% static 'images/logo.png' %}"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lexend:300,400,500,600,700&display=swap">
     <script src="{% static 'js/tailwindcss-3.3.1.js' %}"></script>
     <link href="{% static 'css/flowbite@1.6.5.min.css' %}" rel="stylesheet"/>
     <link href="{% static 'css/metallic.css' %}" rel="stylesheet"/>
@@ -24,22 +24,44 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
     <script src="{% static 'js/scripts.js' %}"></script>
+    <script src="{% static 'js/dropdowns.js' %}"></script>
     <style>
+        :root {
+            --primary-color: #3B82F6;
+            --secondary-color: #1E40AF;
+            --text-primary: #1F2937;
+            --text-secondary: #4B5563;
+            --bg-primary: #F3F4F6;
+            --bg-secondary: #E5E7EB;
+            --transition-speed: 0.3s;
+        }
+
         body {
             font-family: 'Lexend', sans-serif;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
             margin: 0;
             padding: 0;
             overflow-x: hidden;
             overflow-y: auto;
             position: relative;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            color: var(--text-primary);
+        }
+        
+        .dark {
+            --bg-primary: #1F2937;
+            --bg-secondary: #111827;
+            --text-primary: #F9FAFB;
+            --text-secondary: #D1D5DB;
         }
         
         .dark body {
-            background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            color: var(--text-primary);
         }
         
         main {
@@ -49,6 +71,7 @@
             width: 100%;
             overflow-x: hidden;
             overflow-y: visible;
+            padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
         }
 
         footer {
@@ -56,11 +79,63 @@
             position: relative;
             z-index: 2;
             width: 100%;
+            padding: 0 env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
         }
 
         html {
             scroll-behavior: smooth;
             overflow-y: scroll;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Mobile-first styles */
+        @media (max-width: 768px) {
+            body {
+                font-size: 14px;
+            }
+        }
+
+        /* Modern scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 4px;
+        }
+
+        /* Touch-friendly buttons */
+        button, 
+        [type='button'],
+        [type='submit'] {
+            min-height: 44px;
+            min-width: 44px;
+            padding: 0.5rem 1rem;
+            touch-action: manipulation;
+        }
+
+        /* Smooth transitions */
+        * {
+            transition: background-color var(--transition-speed), 
+                      color var(--transition-speed), 
+                      border-color var(--transition-speed),
+                      transform var(--transition-speed);
+        }
+
+        /* Better focus states */
+        :focus-visible {
+            outline: 2px solid var(--primary-color);
+            outline-offset: 2px;
+        }
+
+        /* Disable pull-to-refresh on mobile */
+        body {
+            overscroll-behavior-y: none;
         }
     </style>
 </head>
@@ -83,5 +158,22 @@
 
     {% block extra_js %}
     {% endblock %}
+    
+    <script>
+        // Handle mobile viewport height issues
+        function setMobileHeight() {
+            let vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+        }
+        
+        window.addEventListener('resize', setMobileHeight);
+        window.addEventListener('orientationchange', setMobileHeight);
+        setMobileHeight();
+        
+        // Enable smooth scrolling for iOS
+        document.addEventListener('touchmove', function(e) {
+            e.preventDefault();
+        }, { passive: true });
+    </script>
 </body>
 </html>

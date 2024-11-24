@@ -2,7 +2,7 @@
 {% load i18n %}
 {% get_current_language as LANGUAGE_CODE %}
 
-<nav class="bg-white/80 backdrop-blur-sm border-b border-gray-200 dark:bg-gray-900/80 dark:border-gray-700 {% if LANGUAGE_CODE == 'ar' %}rtl{% endif %} fixed w-full z-50 top-0 transition-all duration-300" id="main-nav">
+<nav class="bg-white/80 backdrop-blur-sm border-b border-gray-200 dark:bg-gray-900/80 dark:border-gray-700 {% if LANGUAGE_CODE == 'ar' %}rtl{% endif %} fixed w-full z-[100] top-0 transition-all duration-300" id="main-nav">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <a href="{% url 'website:index' %}" class="flex items-center transform hover:scale-105 transition-transform duration-300">
             <img src="{% static 'images/logo.png' %}" class="h-16 {% if LANGUAGE_CODE == 'ar' %}ml-3{% else %}mr-3{% endif %}" alt="AutoSahel Logo" />
@@ -22,7 +22,7 @@
                         English
                     {% endif %}
                 </button>
-                <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow-lg dark:bg-gray-700 dark:divide-gray-600" id="language-dropdown-menu">
+                <div class="z-[110] hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow-lg dark:bg-gray-700 dark:divide-gray-600" id="language-dropdown-menu">
                     <ul class="py-2 font-medium">
                         <li>
                             <a href="http://localhost:8000" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white transition-all duration-300">
@@ -44,45 +44,57 @@
             </div>
 
             {% if user.is_authenticated %}
-            <!-- User Menu -->
-            <div class="relative">
-                <button type="button" class="flex items-center text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
+            <!-- Desktop User Menu -->
+            <div class="hidden md:block relative">
+                <button type="button" class="flex items-center text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom-end">
                     <span class="sr-only">Open user menu</span>
                     <div class="relative w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600 ring-2 ring-blue-500 dark:ring-blue-400">
-                        <svg class="absolute w-12 h-12 text-gray-400 -left-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
+                        {% if user.profile.avatar %}
+                            <img src="{{ user.profile.avatar.url }}" alt="{{ user.get_full_name }}" class="w-full h-full object-cover">
+                        {% else %}
+                            <svg class="w-10 h-10 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+                            </svg>
+                        {% endif %}
                     </div>
                 </button>
-                <!-- User dropdown menu -->
-                <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow-lg dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
+                <!-- Dropdown menu -->
+                <div class="z-[110] hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600 absolute {% if LANGUAGE_CODE == 'ar' %}left-0{% else %}right-0{% endif %}" id="user-dropdown">
                     <div class="px-4 py-3">
-                        <span class="block text-sm text-gray-900 dark:text-white font-semibold">{{ user.get_full_name }}</span>
+                        <span class="block text-sm text-gray-900 dark:text-white">{{ user.get_full_name }}</span>
                         <span class="block text-sm text-gray-500 truncate dark:text-gray-400">{{ user.email }}</span>
                     </div>
                     <ul class="py-2" aria-labelledby="user-menu-button">
                         <li>
-                            <a href="{% url 'website:dashboard' %}" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white transition-all duration-300">
-                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
-                                </svg>
-                                {% trans "Dashboard" %}
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{% url 'website:profile' %}" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white transition-all duration-300">
-                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                                </svg>
-                                {% trans "Profile" %}
-                            </a>
-                        </li>
-                        <li>
-                            <form action="{% url 'website:logout' %}" method="post" class="inline w-full">
-                                {% csrf_token %}
-                                <button type="submit" class="flex items-center w-full px-4 py-2 text-sm text-red-600 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-900/50 transition-all duration-300">
-                                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+                            <a href="{% url 'website:dashboard' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white transition-all duration-300">
+                                <div class="flex items-center">
+                                    <svg class="w-4 h-4 {% if LANGUAGE_CODE == 'ar' %}ml-2{% else %}mr-2{% endif %}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
                                     </svg>
-                                    {% trans "Logout" %}
+                                    {% trans "Dashboard" %}
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'website:profile' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white transition-all duration-300">
+                                <div class="flex items-center">
+                                    <svg class="w-4 h-4 {% if LANGUAGE_CODE == 'ar' %}ml-2{% else %}mr-2{% endif %}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                                    </svg>
+                                    {% trans "Profile" %}
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <form method="post" action="{% url 'website:logout' %}">
+                                {% csrf_token %}
+                                <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-900/20 dark:hover:text-red-300 transition-all duration-300">
+                                    <div class="flex items-center">
+                                        <svg class="w-4 h-4 {% if LANGUAGE_CODE == 'ar' %}ml-2{% else %}mr-2{% endif %} text-red-600 dark:text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+                                        </svg>
+                                        {% trans "Sign out" %}
+                                    </div>
                                 </button>
                             </form>
                         </li>
@@ -90,8 +102,8 @@
                 </div>
             </div>
             {% else %}
-            <!-- Auth Buttons -->
-            <div class="flex items-center space-x-3 md:space-x-4 rtl:space-x-reverse">
+            <!-- Desktop Auth Buttons -->
+            <div class="hidden md:flex items-center space-x-3 md:space-x-4 rtl:space-x-reverse">
                 <a href="{% url 'website:login' %}" class="text-gray-800 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 font-medium transition-colors duration-300">{% trans "Login" %}</a>
                 <a href="{% url 'website:register' %}" class="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-500 dark:hover:bg-blue-600 focus:outline-none dark:focus:ring-blue-700 transition-all duration-300">{% trans "Register" %}</a>
             </div>
@@ -110,7 +122,7 @@
         <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="mobile-menu">
             <ul class="flex flex-col md:flex-row font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-transparent dark:bg-gray-800 md:dark:bg-transparent dark:border-gray-700">
                 <li>
-                    <a href="{% url 'website:index' %}" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-600 md:p-0 dark:text-white md:dark:hover:text-blue-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent transition-all duration-300" aria-current="page">{% trans "Home" %}</a>
+                    <a href="{% url 'website:index' %}" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-600 md:p-0 dark:text-white md:dark:hover:text-blue-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent transition-all duration-300">{% trans "Home" %}</a>
                 </li>
                 <li>
                     <a href="{% url 'website:services' %}" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-600 md:p-0 dark:text-white md:dark:hover:text-blue-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent transition-all duration-300">{% trans "Services" %}</a>
@@ -121,6 +133,94 @@
                 <li>
                     <a href="{% url 'website:contact' %}" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-600 md:p-0 dark:text-white md:dark:hover:text-blue-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent transition-all duration-300">{% trans "Contact" %}</a>
                 </li>
+
+                <!-- Mobile Only: Language Switcher -->
+                <li class="md:hidden border-t border-gray-200 dark:border-gray-600 mt-4 pt-4">
+                    <button type="button" data-dropdown-toggle="language-dropdown-menu-mobile" class="inline-flex items-center w-full py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
+                        {% if LANGUAGE_CODE == 'ar' %}
+                            <svg class="w-5 h-5 {% if LANGUAGE_CODE == 'ar' %}ml-2{% else %}mr-2{% endif %}" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="1.5"/><path d="M8.5 12H15.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M12 8.5V15.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                            العربية
+                        {% else %}
+                            <svg class="w-5 h-5 {% if LANGUAGE_CODE == 'ar' %}ml-2{% else %}mr-2{% endif %}" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="1.5"/><path d="M2 12H22" stroke="currentColor" stroke-width="1.5"/><path d="M12 2C14.5013 4.73835 15.9228 8.29203 16 12C15.9228 15.708 14.5013 19.2616 12 22C9.49872 19.2616 8.07725 15.708 8 12C8.07725 8.29203 9.49872 4.73835 12 2Z" stroke="currentColor" stroke-width="1.5"/></svg>
+                            English
+                        {% endif %}
+                    </button>
+                    <div class="z-[110] hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow-lg dark:bg-gray-700 dark:divide-gray-600" id="language-dropdown-menu-mobile">
+                        <ul class="py-2 font-medium">
+                            <li>
+                                <a href="http://localhost:8000" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white transition-all duration-300">
+                                    <div class="inline-flex items-center">English</div>
+                                </a>
+                            </li>
+                            <li>
+                                <form action="{% url 'set_language' %}" method="post" class="inline">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="language" value="ar">
+                                    <input type="hidden" name="next" value="{{ request.path }}">
+                                    <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white transition-all duration-300">
+                                        <div class="inline-flex items-center">العربية</div>
+                                    </button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                {% if user.is_authenticated %}
+                <!-- Mobile Only: User Profile Menu -->
+                <li class="md:hidden border-t border-gray-200 dark:border-gray-600 mt-4 pt-4">
+                    <div class="flex items-center px-3 py-2">
+                        <div class="flex-shrink-0">
+                            <div class="relative w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600 ring-2 ring-blue-500 dark:ring-blue-400">
+                                {% if user.profile.avatar %}
+                                    <img src="{{ user.profile.avatar.url }}" alt="{{ user.get_full_name }}" class="w-full h-full object-cover">
+                                {% else %}
+                                    <svg class="absolute w-12 h-12 text-gray-400 -left-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="ml-3">
+                            <span class="block text-sm text-gray-900 dark:text-white font-semibold">{{ user.get_full_name }}</span>
+                            <span class="block text-sm text-gray-500 truncate dark:text-gray-400">{{ user.email }}</span>
+                        </div>
+                    </div>
+                </li>
+                <li class="md:hidden">
+                    <a href="{% url 'website:dashboard' %}" class="flex items-center px-3 py-2 text-gray-900 rounded hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white transition-all duration-300">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                        </svg>
+                        {% trans "Dashboard" %}
+                    </a>
+                </li>
+                <li class="md:hidden">
+                    <a href="{% url 'website:profile' %}" class="flex items-center px-3 py-2 text-gray-900 rounded hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white transition-all duration-300">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                        </svg>
+                        {% trans "Profile" %}
+                    </a>
+                </li>
+                <li class="md:hidden">
+                    <form method="post" action="{% url 'website:logout' %}">
+                        {% csrf_token %}
+                        <button type="submit" class="flex items-center w-full px-3 py-2 text-gray-900 rounded hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white transition-all duration-300">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+                            </svg>
+                            {% trans "Sign out" %}
+                        </button>
+                    </form>
+                </li>
+                {% else %}
+                <!-- Mobile Only: Auth Buttons -->
+                <li class="md:hidden border-t border-gray-200 dark:border-gray-600 mt-4 pt-4">
+                    <div class="flex flex-col space-y-2 px-3">
+                        <a href="{% url 'website:login' %}" class="text-gray-800 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 font-medium transition-colors duration-300">{% trans "Login" %}</a>
+                        <a href="{% url 'website:register' %}" class="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-500 dark:hover:bg-blue-600 focus:outline-none dark:focus:ring-blue-700 transition-all duration-300 text-center">{% trans "Register" %}</a>
+                    </div>
+                </li>
+                {% endif %}
             </ul>
         </div>
     </div>
