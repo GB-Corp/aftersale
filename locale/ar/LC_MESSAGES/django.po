@@ -18,6 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
 #: .\project\settings.py:137
 msgid "English"
 msgstr "الإنجليزية"
@@ -66,14 +67,31 @@ msgstr "ليس لديك حساب بعد؟"
 msgid "Sign up"
 msgstr "إنشاء حساب"
 
+#: .\website\templates\website\footer.html:11
+#: .\website\templates\website\header.html:9
+msgid "AutoSahel Logo"
+msgstr "شعار أوتوسهل"
+
+#: .\website\templates\website\footer.html:12
+#: .\website\templates\website\header.html:10
+msgid "AutoSahel"
+msgstr "أوتوسهل"
+
+#: .\website\templates\website\footer.html:14
+msgid "Your trusted automotive after-sales service platform."
+msgstr "منصتك الموثوقة لخدمات ما بعد بيع السيارات."
+
 #: .\website\templates\website\footer.html:16
 #: .\website\templates\website\header.html:60
 msgid "Services"
 msgstr "الخدمات"
 
+#: .\website\templates\website\footer.html:18
+msgid "Quick Links"
+msgstr "روابط سريعة"
+
 #: .\website\templates\website\footer.html:19
 #: .\website\templates\website\header.html:66
-#: .\website\templates\website\index.html:22
 msgid "Book Service"
 msgstr "حجز خدمة"
 
@@ -93,9 +111,21 @@ msgstr "فيسبوك"
 msgid "Twitter"
 msgstr "تويتر"
 
+#: .\website\templates\website\footer.html:34
+msgid "For Workshops"
+msgstr "للورش"
+
+#: .\website\templates\website\footer.html:37
+msgid "Register Workshop"
+msgstr "تسجيل ورشة"
+
 #: .\website\templates\website\footer.html:38
 msgid "Legal"
 msgstr "قانوني"
+
+#: .\website\templates\website\footer.html:41
+msgid "Workshop Dashboard"
+msgstr "لوحة تحكم الورشة"
 
 #: .\website\templates\website\footer.html:41
 msgid "Privacy Policy"
@@ -109,15 +139,55 @@ msgstr "الشروط والأحكام"
 msgid "All Rights Reserved"
 msgstr "جميع الحقوق محفوظة"
 
+#: .\website\templates\website\footer.html:66
+msgid "Follow us on Facebook"
+msgstr "تابعنا على فيسبوك"
+
+#: .\website\templates\website\footer.html:71
+msgid "Follow us on Instagram"
+msgstr "تابعنا على انستغرام"
+
+#: .\website\templates\website\footer.html:76
+msgid "Follow us on Twitter"
+msgstr "تابعنا على تويتر"
+
+#: .\website\templates\website\footer.html:81
+msgid "Follow us on LinkedIn"
+msgstr "تابعنا على لينكد إن"
+
 #: .\website\templates\website\header.html:47
-msgid "Open main menu"
-msgstr "فتح القائمة الرئيسية"
+msgid "Open user menu"
+msgstr "فتح قائمة المستخدم"
+
+#: .\website\templates\website\header.html:49
+msgid "Profile picture"
+msgstr "الصورة الشخصية"
 
 #: .\website\templates\website\header.html:57
 msgid "Home"
 msgstr "الرئيسية"
 
+#: .\website\templates\website\header.html:60
+msgid "Profile"
+msgstr "الملف الشخصي"
+
+#: .\website\templates\website\header.html:61
+msgid "Settings"
+msgstr "الإعدادات"
+
+#: .\website\templates\website\header.html:62
+msgid "Sign out"
+msgstr "تسجيل الخروج"
+
 #: .\website\templates\website\header.html:63
+msgid "My Dashboard"
+msgstr "لوحة التحكم"
+
+#: .\website\templates\website\header.html:64
+msgid "My Profile"
+msgstr "ملفي الشخصي"
+
+#: .\website\templates\website\header.html:65
 msgid "Workshops"
 msgstr "الورش"
 
@@ -137,13 +207,32 @@ msgstr "تسجيل الخروج"
 msgid "Login"
 msgstr "تسجيل الدخول"
 
+#: .\website\templates\website\header.html:186
+msgid "Send us a Message"
+msgstr "أرسل لنا رسالة"
+
+#: .\website\templates\website\header.html:187
+msgid "Full Name"
+msgstr "الاسم الكامل"
+
+#: .\website\templates\website\header.html:188
+msgid "Your Email"
+msgstr "بريدك الإلكتروني"
+
+#: .\website\templates\website\header.html:189
+msgid "Message"
+msgstr "الرسالة"
+
+#: .\website\templates\website\header.html:190
+msgid "Send Message"
+msgstr "إرسال الرسالة"
+
 #: .\website\templates\website\index.html:6
 msgid "AutoSahel - Automotive After-Sales Service Platform"
 msgstr "أوتوسهل - منصة خدمات ما بعد البيع للسيارات"
 
 #: .\website\templates\website\index.html:7
-msgid ""
-"Find and book automotive services, manage your workshop, and more with AutoSahel."
+msgid "Find and book automotive services, manage your workshop, and more with AutoSahel."
 msgstr "ابحث واحجز خدمات السيارات، وأدر ورشتك، والمزيد مع أوتوسهل."
 
 #: .\website\templates\website\index.html:19
@@ -151,14 +240,8 @@ msgid "Your Trusted Automotive Service Platform"
 msgstr "منصة خدمات السيارات الموثوقة"
 
 #: .\website\templates\website\index.html:20
-msgid ""
-"Connect with certified workshops, book services, and manage your automotive "
-"maintenance needs all in one place."
+msgid "Connect with certified workshops, book services, and manage your automotive maintenance needs all in one place."
 msgstr "تواصل مع ورش العمل المعتمدة، واحجز الخدمات، وأدر احتياجات صيانة سيارتك في مكان واحد."
-
-#: .\website\templates\website\index.html:26
-msgid "Register Workshop"
-msgstr "تسجيل ورشة"
 
 #: .\website\templates\website\index.html:30
 msgid "car service"
@@ -169,10 +252,8 @@ msgid "Why Choose AutoSahel?"
 msgstr "لماذا تختار أوتوسهل؟"
 
 #: .\website\templates\website\index.html:40
-msgid ""
-"We provide a comprehensive platform for all your automotive after-sales "
-"service needs."
-msgstr "نقدم منصة شاملة لجميع احتياجات خدمات ما بعد البيع للسيارات"
+msgid "We provide a comprehensive platform for all your automotive after-sales service needs."
+msgstr "نقدم منصة شاملة لجميع احتياجات خدمات ما بعد بيع السيارات"
 
 #: .\website\templates\website\index.html:47
 msgid "Certified Workshops"
@@ -257,3 +338,343 @@ msgstr "خدمة الإطارات"
 #: .\website\templates\website\services.html:26
 msgid "Tire maintenance and replacement"
 msgstr "صيانة واستبدال الإطارات"
+
+#: .\website\templates\website\services.html:31
+msgid "Our Services"
+msgstr "خدماتنا"
+
+#: .\website\templates\website\services.html:32
+msgid "Comprehensive automotive after-sales solutions for your needs"
+msgstr "حلول شاملة لخدمات ما بعد البيع للسيارات تلبي احتياجاتك"
+
+#: .\website\templates\website\services.html:33
+msgid "Maintenance Services"
+msgstr "خدمات الصيانة"
+
+#: .\website\templates\website\services.html:34
+msgid "Regular maintenance and servicing to keep your vehicle in optimal condition."
+msgstr "صيانة دورية وخدمة للحفاظ على سيارتك في حالة مثالية"
+
+#: .\website\templates\website\services.html:35
+msgid "Repair Services"
+msgstr "خدمات الإصلاح"
+
+#: .\website\templates\website\services.html:36
+msgid "Expert repair services for all types of mechanical and electrical issues."
+msgstr "خدمات إصلاح متخصصة لجميع أنواع المشاكل الميكانيكية والكهربائية"
+
+#: .\website\templates\website\services.html:37
+msgid "Diagnostics"
+msgstr "التشخيص"
+
+#: .\website\templates\website\services.html:38
+msgid "Advanced diagnostic services to identify and resolve vehicle issues."
+msgstr "خدمات تشخيص متقدمة لتحديد وحل مشاكل السيارات"
+
+#: .\website\templates\website\services.html:39
+msgid "Emergency Services"
+msgstr "خدمات الطوارئ"
+
+#: .\website\templates\website\services.html:40
+msgid "24/7 emergency roadside assistance and support."
+msgstr "مساعدة على الطريق ودعم على مدار الساعة طوال أيام الأسبوع"
+
+#: .\website\templates\website\services.html:41
+msgid "Parts Replacement"
+msgstr "استبدال القطع"
+
+#: .\website\templates\website\services.html:42
+msgid "Genuine parts replacement and installation services."
+msgstr "خدمات استبدال وتركيب قطع غيار أصلية"
+
+#: .\website\templates\website\services.html:43
+msgid "Ready to get started?"
+msgstr "هل أنت مستعد للبدء؟"
+
+#: .\website\templates\website\services.html:46
+msgid "Book a service appointment or contact us for more information."
+msgstr "احجز موعد خدمة أو اتصل بنا لمزيد من المعلومات."
+
+#: .\website\templates\website\workshops.html:11
+msgid "Our Partner Workshops"
+msgstr "ورش العمل الشريكة"
+
+#: .\website\templates\website\workshops.html:12
+msgid "Find trusted automotive workshops near you"
+msgstr "ابحث عن ورش سيارات موثوقة بالقرب منك"
+
+#: .\website\templates\website\workshops.html:13
+msgid "Search workshops..."
+msgstr "البحث عن ورش..."
+
+#: .\website\templates\website\workshops.html:15
+msgid "Maintenance"
+msgstr "الصيانة"
+
+#: .\website\templates\website\workshops.html:16
+msgid "Repair"
+msgstr "الإصلاح"
+
+#: .\website\templates\website\workshops.html:17
+msgid "Diagnostic"
+msgstr "التشخيص"
+
+#: .\website\templates\website\workshops.html:18
+msgid "reviews"
+msgstr "تقييمات"
+
+#: .\website\templates\website\workshops.html:19
+msgid "Specialized in European car maintenance and repairs"
+msgstr "متخصصون في صيانة وإصلاح السيارات الأوروبية"
+
+#: .\website\templates\website\workshops.html:20
+msgid "View Details"
+msgstr "عرض التفاصيل"
+
+#: .\website\templates\website\workshops.html:21
+msgid "Are you a workshop owner?"
+msgstr "هل أنت صاحب ورشة؟"
+
+#: .\website\templates\website\workshops.html:22
+msgid "Join our network of trusted workshops and reach more customers."
+msgstr "انضم إلى شبكتنا من الورش الموثوقة واصل إلى المزيد من العملاء."
+
+#: .\website\templates\website\workshops.html:25
+msgid "Register Your Workshop"
+msgstr "سجل ورشتك"
+
+#: .\website\templates\website\workshops.html:14
+msgid "All Services"
+msgstr "جميع الخدمات"
+
+#: .\website\templates\website\contact.html:10
+msgid "Contact Us"
+msgstr "اتصل بنا"
+
+#: .\website\templates\website\contact.html:11
+msgid "Get in touch with our team for any inquiries or support"
+msgstr "تواصل مع فريقنا لأي استفسارات أو دعم"
+
+#: .\website\templates\website\contact.html:12
+msgid "Get in Touch"
+msgstr "ابقَ على تواصل"
+
+#: .\website\templates\website\contact.html:13
+msgid "Phone"
+msgstr "الهاتف"
+
+#: .\website\templates\website\contact.html:14
+msgid "Email"
+msgstr "البريد الإلكتروني"
+
+#: .\website\templates\website\contact.html:15
+msgid "Office"
+msgstr "المكتب"
+
+#: .\website\templates\website\contact.html:16
+msgid "Follow Us"
+msgstr "تابعنا"
+
+#: .\website\templates\website\dashboard.html:24
+msgid "Switch Profile"
+msgstr "تبديل الملف الشخصي"
+
+#: .\website\templates\website\dashboard.html:27
+msgid "Service Advisor"
+msgstr "مستشار الخدمة"
+
+#: .\website\templates\website\dashboard.html:31
+msgid "Team Leader"
+msgstr "قائد الفريق"
+
+#: .\website\templates\website\dashboard.html:35
+msgid "Technician"
+msgstr "فني"
+
+#: .\website\templates\website\dashboard.html:39
+msgid "Warehouse"
+msgstr "المستودع"
+
+#: .\website\templates\website\dashboard.html:43
+msgid "Car Owner"
+msgstr "مالك السيارة"
+
+#: .\website\templates\website\dashboard.html:47
+msgid "Admin"
+msgstr "المدير"
+
+#: .\website\templates\website\dashboard.html:54
+msgid "Navigation"
+msgstr "التنقل"
+
+#: .\website\templates\website\dashboard\admin_content.html:7
+msgid "Revenue (MTD)"
+msgstr "الإيرادات (الشهر حتى تاريخه)"
+
+#: .\website\templates\website\dashboard\admin_content.html:12
+msgid "Active Jobs"
+msgstr "المهام النشطة"
+
+#: .\website\templates\website\dashboard\admin_content.html:17
+msgid "Customer Satisfaction"
+msgstr "رضا العملاء"
+
+#: .\website\templates\website\dashboard\admin_content.html:22
+msgid "Staff Attendance"
+msgstr "حضور الموظفين"
+
+#: .\website\templates\website\dashboard\admin_content.html:31
+msgid "Revenue Trends"
+msgstr "اتجاهات الإيرادات"
+
+#: .\website\templates\website\dashboard\admin_content.html:39
+msgid "Service Distribution"
+msgstr "توزيع الخدمات"
+
+#: .\website\templates\website\dashboard\admin_content.html:48
+msgid "Staff Overview"
+msgstr "نظرة عامة على الموظفين"
+
+#: .\website\templates\website\dashboard\admin_content.html:49
+msgid "Manage Staff"
+msgstr "إدارة الموظفين"
+
+#: .\website\templates\website\dashboard\admin_content.html:82
+msgid "Operations"
+msgstr "العمليات"
+
+#: .\website\templates\website\dashboard\admin_content.html:83
+msgid "View All"
+msgstr "عرض الكل"
+
+#: .\website\templates\website\dashboard\admin_content.html:116
+msgid "Quick Actions"
+msgstr "إجراءات سريعة"
+
+#: .\website\templates\website\dashboard\service_advisor_content.html:7
+msgid "Today's Appointments"
+msgstr "مواعيد اليوم"
+
+#: .\website\templates\website\dashboard\service_advisor_content.html:11
+msgid "Pending Estimates"
+msgstr "التقديرات المعلقة"
+
+#: .\website\templates\website\dashboard\service_advisor_content.html:15
+msgid "Active Services"
+msgstr "الخدمات النشطة"
+
+#: .\website\templates\website\dashboard\service_advisor_content.html:19
+msgid "Unread Messages"
+msgstr "الرسائل غير المقروءة"
+
+#: .\website\templates\website\dashboard\service_advisor_content.html:26
+msgid "Today's Schedule"
+msgstr "جدول اليوم"
+
+#: .\website\templates\website\dashboard\service_advisor_content.html:31
+msgid "Time"
+msgstr "الوقت"
+
+#: .\website\templates\website\dashboard\service_advisor_content.html:32
+msgid "Customer"
+msgstr "العميل"
+
+#: .\website\templates\website\dashboard\service_advisor_content.html:33
+msgid "Vehicle"
+msgstr "المركبة"
+
+#: .\website\templates\website\dashboard\service_advisor_content.html:34
+msgid "Service"
+msgstr "الخدمة"
+
+#: .\website\templates\website\dashboard\service_advisor_content.html:35
+msgid "Status"
+msgstr "الحالة"
+
+#: .\website\templates\website\dashboard\service_advisor_content.html:36
+msgid "Actions"
+msgstr "الإجراءات"
+
+#: .\website\templates\website\dashboard\service_advisor_content.html:85
+msgid "New Service Order"
+msgstr "طلب خدمة جديد"
+
+#: .\website\templates\website\dashboard\service_advisor_content.html:86
+msgid "Create a new service order"
+msgstr "إنشاء طلب خدمة جديد"
+
+#: .\website\templates\website\dashboard\car_owner_content.html:8
+msgid "My Vehicle"
+msgstr "سيارتي"
+
+#: .\website\templates\website\dashboard\car_owner_content.html:9
+msgid "Add Vehicle"
+msgstr "إضافة سيارة"
+
+#: .\website\templates\website\dashboard\car_owner_content.html:13
+msgid "Make/Model"
+msgstr "الصنع/الموديل"
+
+#: .\website\templates\website\dashboard\car_owner_content.html:17
+msgid "Year"
+msgstr "السنة"
+
+#: .\website\templates\website\dashboard\car_owner_content.html:21
+msgid "Last Service"
+msgstr "آخر صيانة"
+
+#: .\website\templates\website\dashboard\car_owner_content.html:25
+msgid "Next Service Due"
+msgstr "موعد الصيانة القادمة"
+
+#: .\website\templates\website\dashboard\car_owner_content.html:34
+msgid "Service History"
+msgstr "سجل الصيانة"
+
+#: .\website\templates\website\dashboard\car_owner_content.html:39
+msgid "Regular Maintenance"
+msgstr "الصيانة الدورية"
+
+#: .\website\templates\website\dashboard\car_owner_content.html:40
+msgid "Oil Change, Filter Replacement"
+msgstr "تغيير الزيت، استبدال الفلتر"
+
+#: .\website\templates\website\dashboard\car_owner_content.html:42
+msgid "Brake Pad Replacement"
+msgstr "استبدال بطانة الفرامل"
+
+#: .\website\templates\website\dashboard\car_owner_content.html:50
+msgid "Upcoming Service"
+msgstr "الصيانة القادمة"
+
+#: .\website\templates\website\dashboard\car_owner_content.html:53
+msgid "Regular Maintenance Due"
+msgstr "موعد الصيانة الدورية"
+
+#: .\website\templates\website\dashboard\car_owner_content.html:54
+msgid "Estimated Duration: 2 hours"
+msgstr "المدة المتوقعة: ساعتان"
+
+#: .\website\templates\website\dashboard\car_owner_content.html:55
+msgid "Recommended Date: April 15, 2024"
+msgstr "التاريخ المقترح: ١٥ أبريل ٢٠٢٤"
+
+#: .\website\templates\website\dashboard\car_owner_content.html:58
+msgid "Schedule Service"
+msgstr "جدولة الصيانة"
+
+#: .\website\templates\website\dashboard\car_owner_content.html:63
+msgid "Recommended services include:"
+msgstr "الخدمات الموصى بها تشمل:"
+
+#: .\website\templates\website\dashboard\car_owner_content.html:65
+msgid "Oil and filter change"
+msgstr "تغيير الزيت والفلتر"
+
+#: .\website\templates\website\dashboard\car_owner_content.html:66
+msgid "Tire rotation"
+msgstr "تدوير الإطارات"
+
+#: .\website\templates\website\dashboard\car_owner_content.html:67
+msgid "Multi-point inspection"
+msgstr "فحص متعدد النقاط"
